@@ -1,0 +1,30 @@
+h1,
+li,
+ul,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  gap: 4rem;
+}
+
+li {
+  font-size: 1.5rem;
+}
+
+button {
+  height: 1.875rem;
+  width: 6.25rem;
+}
