@@ -21,7 +21,9 @@ function CustomerNavigation() {
           </li>
         </ul>
       </nav>
-      <button>Customer</button>
+      <button onClick={() => (window.location.href = "/owner")}>
+        Customer
+      </button>
     </header>
   );
 }

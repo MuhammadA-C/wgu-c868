@@ -21,7 +21,7 @@ function OwnerNavigation() {
           </li>
         </ul>
       </nav>
-      <button>Owner</button>
+      <button onClick={() => (window.location.href = "/")}>Owner</button>
     </header>
   );
 }
