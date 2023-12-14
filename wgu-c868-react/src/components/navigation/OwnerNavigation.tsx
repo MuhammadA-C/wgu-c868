@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./navigation.css";
 
 function OwnerNavigation() {
@@ -6,10 +7,18 @@ function OwnerNavigation() {
       <h1>Name of Site</h1>
       <nav>
         <ul>
-          <li>Orders</li>
-          <li>Menu</li>
-          <li>Reports</li>
-          <li>Inventory</li>
+          <li>
+            <Link to="/owner">Orders</Link>
+          </li>
+          <li>
+            <Link to="/owner/menu">Menu</Link>
+          </li>
+          <li>
+            <Link to="/owner/reports">Reports</Link>
+          </li>
+          <li>
+            <Link to="/owner/inventory">Inventory</Link>
+          </li>
         </ul>
       </nav>
       <button>Owner</button>

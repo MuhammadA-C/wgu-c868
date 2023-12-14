@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import CustomerNavigation from "../components/navigation/CustomerNavigation";
+import CustomerNavigation from "../../components/navigation/CustomerNavigation";
 
 function RootLayout() {
   return (
@@ -10,4 +10,4 @@ function RootLayout() {
   );
 }
 
-export default RootLayout;
+export { RootLayout };

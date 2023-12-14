@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RootLayout from "./pages/Root";
+import { RootLayout as CustomerRootLayout } from "./pages/customer/Root";
+import { RootLayout as OwnerRootLayout } from "./pages/owner/Root";
+
 import HomePage from "./pages/customer/home/Home";
 import { MenuPage as CustomerMenuPage } from "./pages/customer/menu/Menu";
 import { MenuPage as OwnerMenuPage } from "./pages/owner/menu/Menu";
@@ -14,7 +16,7 @@ const router = createBrowserRouter([
   {
     //Below are the pages that the customer will have access to
     path: "/",
-    element: <RootLayout />,
+    element: <CustomerRootLayout />,
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/menu", element: <CustomerMenuPage /> },
@@ -25,6 +27,7 @@ const router = createBrowserRouter([
   {
     //Below are the pages that the resturant owner will have access to
     path: "/owner",
+    element: <OwnerRootLayout />,
     children: [
       { path: "/owner", element: <OwnerOrdersPage /> },
       { path: "/owner/menu", element: <OwnerMenuPage /> },

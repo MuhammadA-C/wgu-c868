@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./navigation.css";
 
 function CustomerNavigation() {
@@ -6,10 +7,18 @@ function CustomerNavigation() {
       <h1>Name of Site</h1>
       <nav>
         <ul>
-          <li>Home</li>
-          <li>Menu</li>
-          <li>Orders</li>
-          <li>Check Out</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/menu">Menu</Link>
+          </li>
+          <li>
+            <Link to="/orders">Orders</Link>
+          </li>
+          <li>
+            <Link to="/check-out">Check Out</Link>
+          </li>
         </ul>
       </nav>
       <button>Customer</button>
