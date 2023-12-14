@@ -1,4 +1,4 @@
-import CustomerNavigation from "./components/CustomerNavigation";
+import CustomerNavigation from "./components/navigation/CustomerNavigation";
 
 function App() {
   return <CustomerNavigation />;
