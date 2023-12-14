@@ -3,9 +3,7 @@ import "./navigation.css";
 function CustomerNavigation() {
   return (
     <header>
-      <div>
-        <h1>Name of Site</h1>
-      </div>
+      <h1>Name of Site</h1>
       <nav>
         <ul>
           <li>Home</li>
@@ -14,9 +12,7 @@ function CustomerNavigation() {
           <li>Check Out</li>
         </ul>
       </nav>
-      <div>
-        <button>Customer</button>
-      </div>
+      <button>Customer</button>
     </header>
   );
 }

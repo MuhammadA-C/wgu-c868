@@ -3,9 +3,7 @@ import "./navigation.css";
 function OwnerNavigation() {
   return (
     <header>
-      <div>
-        <h1>Name of Site</h1>
-      </div>
+      <h1>Name of Site</h1>
       <nav>
         <ul>
           <li>Orders</li>
@@ -14,9 +12,7 @@ function OwnerNavigation() {
           <li>Inventory</li>
         </ul>
       </nav>
-      <div>
-        <button>Owner</button>
-      </div>
+      <button>Owner</button>
     </header>
   );
 }
