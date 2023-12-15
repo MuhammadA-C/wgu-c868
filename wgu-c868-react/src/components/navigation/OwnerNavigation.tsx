@@ -16,9 +16,6 @@ function OwnerNavigation() {
           <li>
             <Link to="/owner/reports">Reports</Link>
           </li>
-          <li>
-            <Link to="/owner/inventory">Inventory</Link>
-          </li>
         </ul>
       </nav>
       <button onClick={() => (window.location.href = "/")}>Owner</button>

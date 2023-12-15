@@ -1,0 +1,26 @@
+.container {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.table-nav,
+.table {
+  width: 65rem;
+}
+
+.table-nav {
+  height: 5rem;
+  border-top-right-radius: 1.25rem;
+  border-top-left-radius: 1.25rem;
+  background-color: rgb(105, 198, 228);
+}
+
+.table {
+  background-color: lightblue;
+  height: 30rem;
+  border-bottom-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+}
