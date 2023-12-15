@@ -8,7 +8,6 @@ import { MenuPage as OwnerMenuPage } from "./pages/owner/menu/Menu";
 import { OrdersPage as CustomerOrdersPage } from "./pages/customer/orders/Orders";
 import { OrdersPage as OwnerOrdersPage } from "./pages/owner/orders/Orders";
 import CheckOutPage from "./pages/customer/check-out/CheckOut";
-import InventoryPage from "./pages/owner/inventory/Inventory";
 import ReportsPage from "./pages/owner/reports/Reports";
 
 const router = createBrowserRouter([
@@ -32,7 +31,6 @@ const router = createBrowserRouter([
       { path: "/owner", element: <OwnerOrdersPage /> },
       { path: "/owner/menu", element: <OwnerMenuPage /> },
       { path: "/owner/reports", element: <ReportsPage /> },
-      { path: "/owner/inventory", element: <InventoryPage /> },
     ],
   },
 ]);
