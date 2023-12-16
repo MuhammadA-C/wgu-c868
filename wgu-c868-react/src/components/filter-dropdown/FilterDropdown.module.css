@@ -23,3 +23,7 @@ li.filter-item:hover {
 li.filter-item:active {
   background-color: rgb(19, 87, 190);
 }
+
+.filter-item {
+  cursor: pointer;
+}
