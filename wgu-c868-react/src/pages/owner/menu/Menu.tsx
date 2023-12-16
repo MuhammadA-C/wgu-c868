@@ -1,4 +1,4 @@
-import FilterDropdown from "../../../components/filter-dropdown/FilterDropDown";
+import FilterDropdown from "../../../components/filter-dropdown/FilterDropdown";
 import styles from "./Menu.module.css";
 
 function MenuPage() {
