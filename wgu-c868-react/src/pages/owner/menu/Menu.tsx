@@ -1,14 +1,11 @@
-import FilterDropdown from "../../../components/filter-dropdown/FilterDropdown";
+import Dropdown from "../../../components/filter-dropdown/FilterDropdown";
 import styles from "./Menu.module.css";
 
 function MenuPage() {
   return (
     <div className={styles.container}>
       <div className={styles["table-nav"]}>
-        <FilterDropdown
-          listItems={["Drink", "Desert", "Sea Food", "Pasta"]}
-          isVisible={true}
-        />
+        <Dropdown listItems={["Drink", "Desert", "Sea Food", "Pasta"]} />
         <h2>Menu Items</h2>
         <button className={styles["add-btn"]}>Add</button>
       </div>

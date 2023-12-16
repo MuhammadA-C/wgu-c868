@@ -1,17 +1,17 @@
-import styles from "./FilterDropdown.module.css";
+import { useState } from "react";
+import styles from "./Dropdown.module.css";
 
 interface Props {
   listItems: string[];
-  isVisible?: boolean;
 }
 
 //React Component creates each list item
 function ListItems({ listItems }: Props) {
   return (
     <>
-      <ul className={styles["filter-list"]}>
+      <ul className={styles["dropdown-list"]}>
         {listItems.map((item) => (
-          <li className={styles["filter-item"]} key={item}>
+          <li className={styles["dropdown-item"]} key={item}>
             {item}
           </li>
         ))}
@@ -20,13 +20,23 @@ function ListItems({ listItems }: Props) {
   );
 }
 
-function FilterDropdown({ listItems, isVisible }: Props) {
+function Dropdown({ listItems }: Props) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  function handleIsVisible() {
+    if (isVisible) {
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+  }
+
   return (
     <div>
-      <button>Filter</button>
+      <button onClick={handleIsVisible}>Filter</button>
       {isVisible ? <ListItems listItems={listItems} /> : null}
     </div>
   );
 }
 
-export default FilterDropdown;
+export default Dropdown;

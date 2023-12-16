@@ -1,4 +1,4 @@
-.filter-list {
+.dropdown-list {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -11,19 +11,19 @@
   margin-left: 0.12rem;
 }
 
-.filter-item {
+.dropdown-item {
   font-size: 1.1rem;
   padding-left: 0.6rem;
 }
 
-li.filter-item:hover {
+li.dropdown-item:hover {
   background-color: rgb(83, 147, 244);
 }
 
-li.filter-item:active {
+li.dropdown-item:active {
   background-color: rgb(19, 87, 190);
 }
 
-.filter-item {
+.dropdown-item {
   cursor: pointer;
 }
