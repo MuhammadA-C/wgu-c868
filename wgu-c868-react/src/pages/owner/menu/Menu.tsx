@@ -10,7 +10,19 @@ function MenuPage() {
         <h2>Menu Items</h2>
         <button>Add</button>
       </div>
-      <Table></Table>
+      <Table
+        tableItems={[
+          "Pizza",
+          "Burger",
+          "Salad",
+          "Pizza",
+          "Burger",
+          "Salad",
+          "Pizza",
+          "Burger",
+          "Salad",
+        ]}
+      ></Table>
     </div>
   );
 }

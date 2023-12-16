@@ -7,4 +7,42 @@
   height: 30rem;
   border-bottom-left-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow: scroll;
+}
+
+/* Below CSS is for the table items */
+.table-item {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-left: 2rem;
+}
+
+/*Resets any styling on the paragraph element which is used for table items */
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.table-item-container:first-child {
+  padding-top: 2rem;
+}
+
+.table-item-container:last-child {
+  padding-bottom: 2rem;
+}
+
+/* Below CSS is for the buttons (Update/Delete) for the table item */
+.table-item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.table-buttons-container {
+  display: flex;
+  padding-right: 2rem;
+  gap: 2rem;
 }

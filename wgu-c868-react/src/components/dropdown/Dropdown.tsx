@@ -20,6 +20,7 @@ function ListItems({ listItems }: Props) {
   );
 }
 
+//React Component creates the dropdown list
 function Dropdown({ listItems }: Props) {
   const [isVisible, setIsVisible] = useState(false);
 
