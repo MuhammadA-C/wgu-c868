@@ -6,23 +6,13 @@ function MenuPage() {
   return (
     <div className={styles.container}>
       <div className={styles["table-nav"]}>
-        <Dropdown listItems={["Drink", "Desert", "Sea Food", "Pasta"]} />
+        <div className={styles["filter-btn"]}>
+          <Dropdown listItems={["Drink", "Desert", "Sea Food", "Pasta"]} />
+        </div>
         <h2>Menu Items</h2>
-        <button>Add</button>
+        <button className={styles["add-btn"]}>Add</button>
       </div>
-      <Table
-        tableItems={[
-          "Pizza",
-          "Burger",
-          "Salad",
-          "Pizza",
-          "Burger",
-          "Salad",
-          "Pizza",
-          "Burger",
-          "Salad",
-        ]}
-      ></Table>
+      <Table tableItems={["Pizza", "Burger", "Salad"]}></Table>
     </div>
   );
 }

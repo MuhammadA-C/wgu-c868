@@ -20,8 +20,16 @@ button {
   display: flex;
   align-items: center;
   height: 5rem;
-  justify-content: space-around;
+  justify-content: space-between;
   border-top-right-radius: 1.25rem;
   border-top-left-radius: 1.25rem;
   background-color: rgb(105, 198, 228);
+}
+
+.filter-btn {
+  margin-left: 2rem;
+}
+
+.add-btn {
+  margin-right: 2rem;
 }
