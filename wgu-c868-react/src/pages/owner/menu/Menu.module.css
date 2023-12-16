@@ -4,10 +4,6 @@ button {
   padding: 0;
 }
 
-.add-btn {
-  border-radius: 0.5rem;
-}
-
 .container {
   margin-top: 5rem;
   display: flex;
@@ -16,8 +12,7 @@ button {
   flex-direction: column;
 }
 
-.table-nav,
-.table {
+.table-nav {
   width: 65rem;
 }
 
@@ -29,11 +24,4 @@ button {
   border-top-right-radius: 1.25rem;
   border-top-left-radius: 1.25rem;
   background-color: rgb(105, 198, 228);
-}
-
-.table {
-  background-color: lightblue;
-  height: 30rem;
-  border-bottom-left-radius: 1.25rem;
-  border-bottom-right-radius: 1.25rem;
 }

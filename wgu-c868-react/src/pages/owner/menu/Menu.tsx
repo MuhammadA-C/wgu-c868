@@ -1,4 +1,5 @@
 import Dropdown from "../../../components/dropdown/Dropdown";
+import Table from "../../../components/table/Table";
 import styles from "./Menu.module.css";
 
 function MenuPage() {
@@ -7,9 +8,9 @@ function MenuPage() {
       <div className={styles["table-nav"]}>
         <Dropdown listItems={["Drink", "Desert", "Sea Food", "Pasta"]} />
         <h2>Menu Items</h2>
-        <button className={styles["add-btn"]}>Add</button>
+        <button>Add</button>
       </div>
-      <div className={styles.table}></div>
+      <Table></Table>
     </div>
   );
 }
