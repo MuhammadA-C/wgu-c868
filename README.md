@@ -1,5 +1,5 @@
 # wgu-c868
-WGU C868 Software Development Capstone
+WGU C868 Software Development Capstone - Front End
 
 ---
 
