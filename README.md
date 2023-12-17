@@ -45,7 +45,6 @@ WGU C868 Software Development Capstone - Front End
 ## Tools Used
 
 * Front End: HTML, CSS, JavaScript + TypeScript, React.JS
-* Back End: JavaScript + TypeScript, Node.JS
 * Version Control: Git & GitHub
 * Design: Figma
 
