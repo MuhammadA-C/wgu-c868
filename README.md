@@ -15,6 +15,13 @@ WGU C868 Software Development Capstone - Front End
 
 [NEED TO UPDATE]
 
+---
+
+## Back End
+
+The Back End was created in a separate project repository
+
+Link-> https://github.com/MuhammadA-C/wgu-c868-back-end
 
 ---
 
