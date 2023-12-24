@@ -2,6 +2,14 @@ import Dropdown from "../../../components/dropdown/Dropdown";
 import Table from "../../../components/table/Table";
 import styles from "./Menu.module.css";
 
+fetch("http://localhost:3001/api/v1/menu-items")
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data.data[0]);
+  });
+
 function MenuPage() {
   return (
     <div className={styles.container}>
