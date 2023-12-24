@@ -1,7 +1,8 @@
+import MenuItem from "../../model/MenuItem";
 import styles from "./Table.module.css";
 
 interface Props {
-  tableItems: string[];
+  tableItems: MenuItem[];
 }
 
 //React Component creates the table item
@@ -22,7 +23,7 @@ function Table({ tableItems }: Props) {
   return (
     <div className={styles.table}>
       {tableItems.map((item) => (
-        <TableItem item={item} key={item} />
+        <TableItem item={item._name} key={item._menuItemID} />
       ))}
     </div>
   );
