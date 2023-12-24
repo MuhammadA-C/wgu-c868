@@ -1,4 +1,3 @@
-import Dropdown from "../../../components/dropdown/Dropdown";
 import Table from "../../../components/table/Table";
 import styles from "./Menu.module.css";
 import MenuItem from "../../../model/MenuItem";
@@ -52,9 +51,7 @@ function MenuPage() {
   return (
     <div className={styles.container}>
       <div className={styles["table-nav"]}>
-        <div className={styles["filter-btn"]}>
-          <Dropdown listItems={["Drink", "Desert", "Sea Food", "Pasta"]} />
-        </div>
+        <div className={styles["filter-btn"]}></div>
         <h2>Menu Items</h2>
         <button className={styles["add-btn"]}>Add</button>
       </div>
@@ -64,3 +61,9 @@ function MenuPage() {
 }
 
 export { MenuPage };
+
+/*
+  //Removed the filter drop down because may not add it to the project anymore
+    <Dropdown listItems={["Drink", "Desert", "Sea Food", "Pasta"]} />
+
+*/
