@@ -174,6 +174,16 @@ function AddMenuItemPage() {
             name="name"
             className={styles["input-fields"]}
           ></input>
+          <label htmlFor="price">Price:</label>
+          <input
+            type="number"
+            min="1"
+            max="150"
+            step=".01"
+            id="price"
+            name="price"
+            className={styles["input-fields"]}
+          ></input>
           <div className={styles["selected-image-container"]}>
             <img src={selectedImage} className={styles["selected-image"]}></img>
             <button
@@ -184,6 +194,12 @@ function AddMenuItemPage() {
               Select Image
             </button>
           </div>
+          <p>
+            <em>
+              Note: By default pizza will show for the images <br />
+              if you do not enter a name
+            </em>
+          </p>
           <div className={styles["btn-container"]}>
             <input
               type="submit"

@@ -28,7 +28,7 @@ input.submit-btn {
 
 .btn-container {
   display: flex;
-  margin-top: 4rem;
+  margin-top: 2rem;
   justify-content: space-between;
 }
 
@@ -39,7 +39,7 @@ button.cancel-btn {
 
 .selected-image-container {
   display: flex;
-  margin-top: 4rem;
+  margin-top: 2rem;
   justify-content: space-between;
   align-items: end;
 }
@@ -58,7 +58,7 @@ button.cancel-btn {
   /* Shape */
   background-color: rgb(224, 224, 224);
   width: 65rem;
-  height: 35rem;
+  height: 38rem;
 
   /* Position */
   position: fixed;
