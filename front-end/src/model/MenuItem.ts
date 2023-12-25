@@ -1,9 +1,9 @@
-class MenuItem {
+import Item from "./Item";
+
+class MenuItem extends Item {
   _menuItemID?: number;
-  _name: string;
   _description: string;
   _picture: string;
-  _price: number;
 
   constructor(
     name: string,
@@ -11,10 +11,9 @@ class MenuItem {
     picture: string,
     price: number
   ) {
-    this._name = name;
+    super(name, price);
     this._description = description;
     this._picture = picture;
-    this._price = price;
   }
 
   get menuItemID(): number {
