@@ -53,7 +53,12 @@ function MenuPage() {
       <div className={styles["table-nav"]}>
         <div className={styles["filter-btn"]}></div>
         <h2>Menu Items</h2>
-        <button className={styles["add-btn"]}>Add</button>
+        <button
+          className={styles["add-btn"]}
+          onClick={() => (window.location.href = "/owner/menu/add-menu-item")}
+        >
+          Add
+        </button>
       </div>
       <Table tableItems={menuItems}></Table>
     </div>
