@@ -58,7 +58,7 @@ button.cancel-btn {
   /* Shape */
   background-color: rgb(224, 224, 224);
   width: 65rem;
-  height: 38rem;
+  height: 40rem;
 
   /* Position */
   position: fixed;
@@ -84,4 +84,8 @@ div.image-container {
 img.image-option {
   width: 18rem;
   height: 20rem;
+}
+
+h4 {
+  color: red;
 }

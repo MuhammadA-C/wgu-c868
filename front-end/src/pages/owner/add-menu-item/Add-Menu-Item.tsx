@@ -1,5 +1,5 @@
 import styles from "./Add-Menu-Item.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 interface IUnsplash {
   url: string | undefined;
@@ -44,30 +44,27 @@ function ImageOptions({
   return (
     <>
       <div className={styles["image-container"]}>
-        <a
-          href="#"
+        <div
           onClick={() =>
             handleSelectedImage(setOpenModal, setSelectedImage, image1?.url)
           }
         >
           <img src={image1?.url} className={styles["image-option"]}></img>
-        </a>
-        <a
-          href="#"
+        </div>
+        <div
           onClick={() =>
             handleSelectedImage(setOpenModal, setSelectedImage, image2?.url)
           }
         >
           <img src={image2?.url} className={styles["image-option"]}></img>
-        </a>
-        <a
-          href="#"
+        </div>
+        <div
           onClick={() =>
             handleSelectedImage(setOpenModal, setSelectedImage, image3?.url)
           }
         >
           <img src={image3?.url} className={styles["image-option"]}></img>
-        </a>
+        </div>
       </div>
     </>
   );
@@ -114,10 +111,6 @@ function Modal({ open, setOpenModal, setSelectedImage, search }: Prop) {
   );
 }
 
-function handleSubmited() {
-  // Add code here to get user input and submit to the back end via API call
-}
-
 function toggleModal(openModal: boolean, setOpenModal: Function) {
   if (openModal) {
     setOpenModal(false);
@@ -143,6 +136,29 @@ function AddMenuItemPage() {
   const [openModal, setOpenModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [search, setSearch] = useState("pizza");
+  const [isHidden, setIsHidden] = useState(true);
+
+  const price = useRef<HTMLInputElement>(null);
+  const description = useRef<HTMLInputElement>(null);
+  const name = useRef<HTMLInputElement>(null);
+
+  function handleSubmited() {
+    // Add code here to get user input and submit to the back end via API call
+    if (
+      name.current == null ||
+      name.current.value == "" ||
+      description.current == null ||
+      description.current.value == "" ||
+      price.current == null ||
+      price.current.value == "" ||
+      selectedImage == ""
+    ) {
+      setIsHidden(false);
+      return;
+    }
+    //Need to send data to the database
+    window.location.href = "/owner/menu";
+  }
 
   return (
     <>
@@ -161,6 +177,7 @@ function AddMenuItemPage() {
         >
           <label htmlFor="name">Name:</label>
           <input
+            ref={name}
             type="text"
             id="name"
             name="name"
@@ -169,6 +186,7 @@ function AddMenuItemPage() {
           ></input>
           <label htmlFor="description">Description of item:</label>
           <input
+            ref={description}
             type="text"
             id="description"
             name="name"
@@ -176,6 +194,7 @@ function AddMenuItemPage() {
           ></input>
           <label htmlFor="price">Price:</label>
           <input
+            ref={price}
             type="number"
             min="1"
             max="150"
@@ -205,7 +224,7 @@ function AddMenuItemPage() {
               type="submit"
               value="Submit"
               className={styles["submit-btn"]}
-              onClick={() => (window.location.href = "/owner/menu")}
+              onClick={() => handleSubmited()}
             ></input>
             <button
               className={styles["cancel-btn"]}
@@ -215,6 +234,11 @@ function AddMenuItemPage() {
             </button>
           </div>
         </form>
+        <div hidden={isHidden}>
+          <h4>
+            Need to fill in all fields and select image prior to clicking submit
+          </h4>
+        </div>
       </div>
     </>
   );
