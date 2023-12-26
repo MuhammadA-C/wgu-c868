@@ -1,6 +1,7 @@
 import styles from "./Update-Menu-Item.module.css";
 import { useEffect, useState, useRef } from "react";
 import MenuItem from "../../../model/MenuItem";
+import SelectedMenuItem from "../../../helper/SelectedMenuItem";
 
 interface IUnsplash {
   url: string | undefined;
@@ -149,6 +150,8 @@ function UpdateMenuItemPage() {
 
   /* MenuItem object to add to the database */
   const [addMenuItem, setAddMenuItem] = useState<MenuItem>();
+
+  console.log("Selected ID: " + SelectedMenuItem.menuItemID);
 
   useEffect(() => {
     // Steps the API call below from running if no menu item is created from the field inputs

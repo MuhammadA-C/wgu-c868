@@ -1,6 +1,8 @@
 import MenuItem from "../../model/MenuItem";
 import styles from "./Table.module.css";
 import { useEffect, useState } from "react";
+import SelectedMenuItem from "../../helper/SelectedMenuItem";
+import { Link } from "react-router-dom";
 
 interface Props {
   tableItems: MenuItem[];
@@ -21,13 +23,11 @@ function TableItem({
     <div className={styles["table-item-container"]}>
       <p className={styles["table-item"]}>{item}</p>
       <div className={styles["table-buttons-container"]}>
-        <button
-          onClick={() =>
-            (window.location.href = "/owner/menu/update-menu-item")
-          }
-        >
-          Update
-        </button>
+        <Link to="/owner/menu/update-menu-item">
+          <button onClick={() => (SelectedMenuItem.menuItemID = itemID)}>
+            Update
+          </button>
+        </Link>
         <button
           onClick={() => {
             setDeleteItem(itemID);

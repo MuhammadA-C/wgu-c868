@@ -1,4 +1,4 @@
-import CartItem from "./CartItem";
+import CartItem from "../model/CartItem";
 
 class Cart {
   static cartItems: CartItem[];
