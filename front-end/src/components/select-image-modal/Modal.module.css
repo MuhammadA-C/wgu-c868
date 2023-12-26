@@ -1,0 +1,22 @@
+.select-image-modal-container {
+  display: flex;
+  flex-direction: column;
+
+  /* Shape */
+  background-color: rgb(224, 224, 224);
+  width: 65rem;
+  height: 40rem;
+
+  /* Position */
+  position: fixed;
+  right: 18rem;
+  top: 10rem;
+  border-radius: 2rem;
+}
+
+button.close-modal {
+  width: 4rem;
+  align-self: flex-end;
+  margin-right: 2rem;
+  margin-top: 1rem;
+}

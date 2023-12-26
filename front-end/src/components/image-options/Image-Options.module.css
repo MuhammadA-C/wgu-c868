@@ -1,0 +1,11 @@
+div.image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+  gap: 2rem;
+}
+
+img.image-option {
+  width: 18rem;
+  height: 20rem;
+}
