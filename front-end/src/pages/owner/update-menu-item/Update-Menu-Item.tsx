@@ -27,7 +27,7 @@ function handleCancelBtn() {
   window.location.href = "/owner/menu";
 }
 
-// Update Menu Item Page React Component
+// Update Menu Item Page React Component //
 function UpdateMenuItemPage() {
   /* Form Input Fields */
   const price = useRef<HTMLInputElement>(null);
