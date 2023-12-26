@@ -1,12 +1,16 @@
 import MenuItem from "../../model/MenuItem";
 import styles from "./Table.module.css";
 import { useEffect, useState } from "react";
-import SelectedMenuItem from "../../helper/SelectedMenuItem";
-import { Link } from "react-router-dom";
+import LocalStorageKeys from "../../helper/LocalStorageKeys";
 
 interface Props {
   tableItems: MenuItem[];
   setUpdateTable: Function;
+}
+
+function handleSwitchToUpdateItem(itemID: number | undefined) {
+  localStorage.setItem(LocalStorageKeys.selected_menu_item_id, String(itemID));
+  window.location.href = "/owner/menu/update-menu-item";
 }
 
 //React Component creates the table item
@@ -23,11 +27,7 @@ function TableItem({
     <div className={styles["table-item-container"]}>
       <p className={styles["table-item"]}>{item}</p>
       <div className={styles["table-buttons-container"]}>
-        <Link to="/owner/menu/update-menu-item">
-          <button onClick={() => (SelectedMenuItem.menuItemID = itemID)}>
-            Update
-          </button>
-        </Link>
+        <button onClick={() => handleSwitchToUpdateItem(itemID)}>Update</button>
         <button
           onClick={() => {
             setDeleteItem(itemID);

@@ -1,7 +1,7 @@
 import styles from "./Update-Menu-Item.module.css";
 import { useEffect, useState, useRef } from "react";
 import MenuItem from "../../../model/MenuItem";
-import SelectedMenuItem from "../../../helper/SelectedMenuItem";
+import LocalStorageKeys from "../../../helper/LocalStorageKeys";
 
 interface IUnsplash {
   url: string | undefined;
@@ -133,6 +133,12 @@ function setSearchValue(
   }
 }
 
+function handleCancelBtn() {
+  // Need to remove the selected menu item from local storage because it is no longer needed
+  localStorage.removeItem(LocalStorageKeys.selected_menu_item_id);
+  window.location.href = "/owner/menu";
+}
+
 // Update Menu Item Page React Component
 function UpdateMenuItemPage() {
   /* Select image modal */
@@ -151,7 +157,21 @@ function UpdateMenuItemPage() {
   /* MenuItem object to add to the database */
   const [addMenuItem, setAddMenuItem] = useState<MenuItem>();
 
-  console.log("Selected ID: " + SelectedMenuItem.menuItemID);
+  useEffect(() => {
+    // Gets the menu item for the selected item to update
+    fetch(
+      `http://localhost:3001/api/v1/menu-items/${localStorage.getItem(
+        LocalStorageKeys.selected_menu_item_id
+      )}`
+    )
+      .then((response) => {
+        console.log(response);
+      })
+      .then((data) => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     // Steps the API call below from running if no menu item is created from the field inputs
@@ -199,6 +219,7 @@ function UpdateMenuItemPage() {
       return;
     }
 
+    // Need to change to update!
     // Sets the item to add to the database which will cause the API call to trigger to add it
     setAddMenuItem(
       new MenuItem(
@@ -208,6 +229,9 @@ function UpdateMenuItemPage() {
         Number(price.current.value)
       )
     );
+
+    // Need to remove the selected menu item from local storage because it is no longer needed
+    localStorage.removeItem(LocalStorageKeys.selected_menu_item_id);
   }
 
   return (
@@ -280,7 +304,7 @@ function UpdateMenuItemPage() {
             ></input>
             <button
               className={styles["cancel-btn"]}
-              onClick={() => (window.location.href = "/owner/menu")}
+              onClick={() => handleCancelBtn()}
             >
               Cancel
             </button>
