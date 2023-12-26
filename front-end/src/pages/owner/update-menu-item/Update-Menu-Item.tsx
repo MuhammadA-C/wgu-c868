@@ -1,6 +1,5 @@
 import styles from "./Update-Menu-Item.module.css";
 import { useEffect, useState, useRef } from "react";
-import MenuItem from "../../../model/MenuItem";
 import LocalStorageKeys from "../../../helper/LocalStorageKeys";
 
 interface IUnsplash {
@@ -141,11 +140,6 @@ function handleCancelBtn() {
 
 // Update Menu Item Page React Component
 function UpdateMenuItemPage() {
-  /* Select image modal */
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState("");
-  const [search, setSearch] = useState("pizza");
-
   /* Form Input Fields */
   const price = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLInputElement>(null);
@@ -154,10 +148,18 @@ function UpdateMenuItemPage() {
   /* Error message informing the user they need to fill in all fields prior to hitting submit */
   const [isHidden, setIsHidden] = useState(true);
 
-  /* MenuItem object to add to the database */
-  const [addMenuItem, setAddMenuItem] = useState<MenuItem>();
+  /* Menu Item Properties */
+  const [itemPicture, setItemPicture] = useState("");
+  const [itemName, setItemName] = useState("");
+  const [itemPrice, setItemPrice] = useState("");
+  const [itemDescription, setItemDescription] = useState("");
+  const [itemID, setItemID] = useState("");
+  const [saveChanges, setSaveChanges] = useState(false); // Triggers the API to update the object
 
-  let menuItem: MenuItem;
+  /* Select image modal */
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [search, setSearch] = useState("pizza");
 
   useEffect(() => {
     // Gets the menu item for the selected item to update
@@ -175,17 +177,16 @@ function UpdateMenuItemPage() {
         );
       })
       .then((data) => {
-        // Creating a reference to the menu item to update
-        menuItem = new MenuItem(
-          data.data[0].name,
-          data.data[0].description,
-          data.data[0].picture,
-          data.data[0].price
-        );
-        menuItem._menuItemID = data.data[0].menu_item_id;
+        // Creating references to the menu item properties
+        setItemID(data.data[0].menu_item_id);
+        setItemName(data.data[0].name);
+        setItemPicture(data.data[0].picture);
+        setItemDescription(data.data[0].description);
+        setItemPrice(data.data[0].price);
 
-        setSelectedImage(menuItem._picture);
-        setSearch(menuItem._name); // Search value for the unspalsh API image modal
+        // For the image modal
+        setSelectedImage(data.data[0].picture);
+        setSearch(data.data[0].name); // Search value for the unspalsh API image modal
       })
       .catch((error) => {
         console.log(error);
@@ -193,34 +194,34 @@ function UpdateMenuItemPage() {
   }, []);
 
   useEffect(() => {
-    // Steps the API call below from running if no menu item is created from the field inputs
-    if (addMenuItem == undefined) {
+    // Stops the API call below from running from on page load
+    if (saveChanges == false) {
       return;
     }
 
-    // API call to create the menu item --- > need to replace with update
-    fetch("http://localhost:3001/api/v1/menu-items", {
-      method: "POST",
+    // API call to update the menu item
+    fetch(`http://localhost:3001/api/v1/menu-items/${itemID}`, {
+      method: "PATCH",
       body: JSON.stringify({
-        name: addMenuItem._name,
-        description: addMenuItem._description,
-        picture: addMenuItem._picture,
-        price: addMenuItem._price,
+        name: itemName,
+        description: itemDescription,
+        picture: itemPicture,
+        price: itemPrice,
       }),
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((response) => {
-        // Checks to see if the item was added successfully to take the user back
-        if (response.status == 201) {
-          window.location.href = "/owner/menu";
+        // Checks to see if the item was updated successfully to take the user back
+        if (response.status == 200) {
+          return (window.location.href = "/owner/menu");
         }
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [addMenuItem]); // need a new usestate to trigger update
+  }, [saveChanges]); // need a new usestate to trigger update
 
   function handleSubmited() {
     // Checks to see if there are any empty input fields
@@ -239,13 +240,16 @@ function UpdateMenuItemPage() {
     }
 
     // Updates the menu item object values
-    menuItem._name = name.current.value;
-    menuItem._description = description.current.value;
-    menuItem._picture = selectedImage;
-    menuItem._price = Number(price.current.value);
+    setItemName(name.current.value);
+    setItemDescription(description.current.value);
+    setItemPicture(selectedImage);
+    setItemPrice(price.current.value);
 
     // Need to remove the selected menu item from local storage because it is no longer needed
     localStorage.removeItem(LocalStorageKeys.selected_menu_item_id);
+
+    // Triggers the API call to update the object
+    setSaveChanges(true);
   }
 
   return (
@@ -269,6 +273,7 @@ function UpdateMenuItemPage() {
             type="text"
             maxLength={50}
             id="name"
+            defaultValue={itemName}
             name="name"
             className={styles["input-fields"]}
             onChange={(e) => setSearchValue(setSearch, e)}
@@ -279,7 +284,8 @@ function UpdateMenuItemPage() {
             type="text"
             maxLength={255}
             id="description"
-            name="name"
+            name="description"
+            defaultValue={itemDescription}
             className={styles["input-fields"]}
           ></input>
           <label htmlFor="price">Price:</label>
@@ -289,6 +295,7 @@ function UpdateMenuItemPage() {
             min="1"
             max="150"
             step=".01"
+            defaultValue={itemPrice}
             id="price"
             name="price"
             className={styles["input-fields"]}

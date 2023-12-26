@@ -172,7 +172,7 @@ function AddMenuItemPage() {
       .then((response) => {
         // Checks to see if the item was added successfully to take the user back
         if (response.status == 201) {
-          window.location.href = "/owner/menu";
+          return (window.location.href = "/owner/menu");
         }
       })
       .catch((error) => {
@@ -238,7 +238,7 @@ function AddMenuItemPage() {
             type="text"
             maxLength={255}
             id="description"
-            name="name"
+            name="description"
             className={styles["input-fields"]}
           ></input>
           <label htmlFor="price">Price:</label>
