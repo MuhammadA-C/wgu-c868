@@ -21,7 +21,13 @@ function TableItem({
     <div className={styles["table-item-container"]}>
       <p className={styles["table-item"]}>{item}</p>
       <div className={styles["table-buttons-container"]}>
-        <button>Update</button>
+        <button
+          onClick={() =>
+            (window.location.href = "/owner/menu/update-menu-item")
+          }
+        >
+          Update
+        </button>
         <button
           onClick={() => {
             setDeleteItem(itemID);

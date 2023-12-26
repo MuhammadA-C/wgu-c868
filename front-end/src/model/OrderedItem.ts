@@ -1,18 +1,18 @@
 class OrderedItem {
   _orderedItemID?: number;
   _orderID: string;
-  _menuItemID: number;
+  _menuItemName: string;
   _price: number;
   _quantity: number;
 
   constructor(
     orderID: string,
-    menuItemID: number,
+    menuItemName: string,
     price: number,
     quantity: number
   ) {
     this._orderID = orderID;
-    this._menuItemID = menuItemID;
+    this._menuItemName = menuItemName;
     this._price = price;
     this._quantity = quantity;
   }
@@ -28,8 +28,8 @@ class OrderedItem {
     return this._orderID;
   }
 
-  get menuItemID(): number {
-    return this.menuItemID;
+  get menuItemName(): string {
+    return this._menuItemName;
   }
 
   get price(): number {
@@ -48,8 +48,8 @@ class OrderedItem {
     this._orderID = orderID;
   }
 
-  set menuItemID(menuItemID: number) {
-    this.menuItemID = menuItemID;
+  set menuItemName(menuItemName: string) {
+    this._menuItemName = menuItemName;
   }
 
   set price(price: number) {

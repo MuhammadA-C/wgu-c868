@@ -1,0 +1,91 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 6rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+input.input-fields {
+  width: 20rem;
+  height: 2rem;
+}
+
+input.submit-btn {
+  width: 12rem;
+  height: 2rem;
+}
+
+.btn-container {
+  display: flex;
+  margin-top: 2rem;
+  justify-content: space-between;
+}
+
+button.cancel-btn {
+  width: 6rem;
+  height: 2rem;
+}
+
+.selected-image-container {
+  display: flex;
+  margin-top: 2rem;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.selected-image {
+  width: 12rem;
+  height: 8rem;
+}
+
+/* Select Image Modal*/
+
+.select-image-modal-container {
+  display: flex;
+  flex-direction: column;
+
+  /* Shape */
+  background-color: rgb(224, 224, 224);
+  width: 65rem;
+  height: 40rem;
+
+  /* Position */
+  position: fixed;
+  right: 18rem;
+  top: 10rem;
+  border-radius: 2rem;
+}
+
+button.close-modal {
+  width: 4rem;
+  align-self: flex-end;
+  margin-right: 2rem;
+  margin-top: 1rem;
+}
+
+div.image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+  gap: 2rem;
+}
+
+img.image-option {
+  width: 18rem;
+  height: 20rem;
+}
+
+h4 {
+  color: red;
+}
