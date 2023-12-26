@@ -20,13 +20,26 @@ interface IMenuItem {
 function MenuPage() {
   const arrayOfMenuItems: MenuItem[] = []; // Will be passed into the setMenuItems
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [updateTable, setUpdateTable] = useState("");
 
   useEffect(() => {
     // API call to get the menu items
     fetch("http://localhost:3001/api/v1/menu-items")
       .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
+        if (response.status == 200) {
           return response.json();
+        } else if (response.status == 204) {
+          /* 
+            Returning back an empty object when the API returns back a 204 for no data in database.
+            This is needed so that the UI updates to display an empty table.
+          */
+          let data: IMenuItemJSON = {
+            status: String(response.status),
+            results: 0,
+            data: [],
+          };
+
+          return data;
         }
         throw new Error("Status Code: " + response.status);
       })
@@ -46,7 +59,7 @@ function MenuPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [updateTable]);
 
   return (
     <div className={styles.container}>
@@ -60,7 +73,7 @@ function MenuPage() {
           Add
         </button>
       </div>
-      <Table tableItems={menuItems}></Table>
+      <Table tableItems={menuItems} setUpdateTable={setUpdateTable}></Table>
     </div>
   );
 }

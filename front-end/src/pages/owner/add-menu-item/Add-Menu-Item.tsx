@@ -1,5 +1,6 @@
 import styles from "./Add-Menu-Item.module.css";
 import { useEffect, useState, useRef } from "react";
+import MenuItem from "../../../model/MenuItem";
 
 interface IUnsplash {
   url: string | undefined;
@@ -133,17 +134,54 @@ function setSearchValue(
 
 // Add Menu Item Page React Component
 function AddMenuItemPage() {
+  /* Select image modal */
   const [openModal, setOpenModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [search, setSearch] = useState("pizza");
-  const [isHidden, setIsHidden] = useState(true);
 
+  /* Form Input Fields */
   const price = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLInputElement>(null);
   const name = useRef<HTMLInputElement>(null);
 
+  /* Error message informing the user they need to fill in all fields prior to hitting submit */
+  const [isHidden, setIsHidden] = useState(true);
+
+  /* MenuItem object to add to the database */
+  const [addMenuItem, setAddMenuItem] = useState<MenuItem>();
+
+  useEffect(() => {
+    // Steps the API call below from running if no menu item is created from the field inputs
+    if (addMenuItem == undefined) {
+      return;
+    }
+
+    // API call to create the menu item
+    fetch("http://localhost:3001/api/v1/menu-items", {
+      method: "POST",
+      body: JSON.stringify({
+        name: addMenuItem._name,
+        description: addMenuItem._description,
+        picture: addMenuItem._picture,
+        price: addMenuItem._price,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        // Checks to see if the item was added successfully to take the user back
+        if (response.status == 201) {
+          window.location.href = "/owner/menu";
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [addMenuItem]);
+
   function handleSubmited() {
-    // Add code here to get user input and submit to the back end via API call
+    // Checks to see if there are any empty input fields
     if (
       name.current == null ||
       name.current.value == "" ||
@@ -153,11 +191,20 @@ function AddMenuItemPage() {
       price.current.value == "" ||
       selectedImage == ""
     ) {
+      // Shows the error message telling the user to fill in all input fields
       setIsHidden(false);
       return;
     }
-    //Need to send data to the database
-    window.location.href = "/owner/menu";
+
+    // Sets the item to add to the database which will cause the API call to trigger to add it
+    setAddMenuItem(
+      new MenuItem(
+        name.current.value,
+        description.current.value,
+        selectedImage,
+        Number(price.current.value)
+      )
+    );
   }
 
   return (
@@ -179,6 +226,7 @@ function AddMenuItemPage() {
           <input
             ref={name}
             type="text"
+            maxLength={50}
             id="name"
             name="name"
             className={styles["input-fields"]}
@@ -188,6 +236,7 @@ function AddMenuItemPage() {
           <input
             ref={description}
             type="text"
+            maxLength={255}
             id="description"
             name="name"
             className={styles["input-fields"]}
