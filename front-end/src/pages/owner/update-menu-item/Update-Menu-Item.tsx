@@ -157,6 +157,8 @@ function UpdateMenuItemPage() {
   /* MenuItem object to add to the database */
   const [addMenuItem, setAddMenuItem] = useState<MenuItem>();
 
+  let menuItem: MenuItem;
+
   useEffect(() => {
     // Gets the menu item for the selected item to update
     fetch(
@@ -165,9 +167,26 @@ function UpdateMenuItemPage() {
       )}`
     )
       .then((response) => {
-        console.log(response);
+        if (response.status == 200) {
+          return response.json();
+        }
+        throw new Error(
+          `Status Code: ${response.status} Text: ${response.statusText}`
+        );
       })
-      .then((data) => {})
+      .then((data) => {
+        // Creating a reference to the menu item to update
+        menuItem = new MenuItem(
+          data.data[0].name,
+          data.data[0].description,
+          data.data[0].picture,
+          data.data[0].price
+        );
+        menuItem._menuItemID = data.data[0].menu_item_id;
+
+        setSelectedImage(menuItem._picture);
+        setSearch(menuItem._name); // Search value for the unspalsh API image modal
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -179,7 +198,7 @@ function UpdateMenuItemPage() {
       return;
     }
 
-    // API call to create the menu item
+    // API call to create the menu item --- > need to replace with update
     fetch("http://localhost:3001/api/v1/menu-items", {
       method: "POST",
       body: JSON.stringify({
@@ -201,7 +220,7 @@ function UpdateMenuItemPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, [addMenuItem]);
+  }, [addMenuItem]); // need a new usestate to trigger update
 
   function handleSubmited() {
     // Checks to see if there are any empty input fields
@@ -219,16 +238,11 @@ function UpdateMenuItemPage() {
       return;
     }
 
-    // Need to change to update!
-    // Sets the item to add to the database which will cause the API call to trigger to add it
-    setAddMenuItem(
-      new MenuItem(
-        name.current.value,
-        description.current.value,
-        selectedImage,
-        Number(price.current.value)
-      )
-    );
+    // Updates the menu item object values
+    menuItem._name = name.current.value;
+    menuItem._description = description.current.value;
+    menuItem._picture = selectedImage;
+    menuItem._price = Number(price.current.value);
 
     // Need to remove the selected menu item from local storage because it is no longer needed
     localStorage.removeItem(LocalStorageKeys.selected_menu_item_id);
