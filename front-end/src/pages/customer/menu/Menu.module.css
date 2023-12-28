@@ -30,3 +30,14 @@ input.search-bar {
   height: 1.8rem;
   margin-right: 2rem;
 }
+
+div.table-column-names {
+  display: flex;
+  background-color: rgb(88, 172, 200);
+  width: 65rem;
+  gap: 22rem;
+}
+
+.table-column-names > :first-child {
+  margin-left: 2rem;
+}

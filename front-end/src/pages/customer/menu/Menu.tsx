@@ -96,6 +96,11 @@ function MenuPage() {
           ></input>
         </div>
       </div>
+      <div className={styles["table-column-names"]}>
+        <h3>Name:</h3>
+        <h3>Price:</h3>
+        <h3>Count:</h3>
+      </div>
       <Table tableItems={menuItems}></Table>
     </div>
   );
