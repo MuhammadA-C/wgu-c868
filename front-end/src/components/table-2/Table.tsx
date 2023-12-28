@@ -101,18 +101,18 @@ function decreaseCount(itemID: string, setCount: Function) {
 function TableItem({
   item,
   itemID,
+  price,
 }: {
   item: string;
   itemID: number | undefined;
+  price: string;
 }) {
   const [count, setCount] = useState(setCountOnPageLoad(String(itemID)));
 
-  //localStorage.clear();
-
-  // Need to use local storage to store references to cart items
   return (
     <div className={styles["table-item-container"]}>
       <p className={styles["table-item"]}>{item}</p>
+      <p className={styles["table-item"]}>{`$${price}`}</p>
       <div className={styles["table-buttons-container"]}>
         <button onClick={() => increaseCount(String(itemID), setCount)}>
           +
@@ -135,6 +135,7 @@ function Table({ tableItems }: Props) {
           item={item._name}
           key={item._menuItemID}
           itemID={item._menuItemID}
+          price={String(item.price)}
         />
       ))}
     </div>

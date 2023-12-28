@@ -64,7 +64,15 @@ function MenuPage() {
   return (
     <div className={styles.container}>
       <div className={styles["table-nav"]}>
-        <h2>Menu Items</h2>
+        <h2 className={styles["table-name"]}>Menu Items</h2>
+        <div>
+          <input
+            type="text"
+            placeholder={"Search"}
+            maxLength={50}
+            className={styles["search-bar"]}
+          ></input>
+        </div>
       </div>
       <Table tableItems={menuItems}></Table>
     </div>
