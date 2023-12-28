@@ -33,12 +33,8 @@ function MenuPage() {
       }
     }
 
-    if (filteredList.length > 0) {
-      // Sets the table view to show the filtered list of menu items
-      return setMenuItems(filteredList);
-    }
-    // Sets the table view to list all database menu items
-    return setMenuItems(copyOfMenuItems);
+    // Sets the table view to show the filtered list of menu items
+    return setMenuItems(filteredList);
   }
 
   useEffect(() => {
