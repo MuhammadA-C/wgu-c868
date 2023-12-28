@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import MenuItem from "../../../model/MenuItem";
 import Table from "../../../components/table-2/Table";
 import styles from "./Menu.module.css";
@@ -17,12 +17,33 @@ interface IMenuItem {
   price: number;
 }
 
+// React Menu Page Component //
 function MenuPage() {
-  const arrayOfMenuItems: MenuItem[] = []; // Will be passed into the setMenuItems
+  const [copyOfMenuItems, setCopyOfMenuItems] = useState<MenuItem[]>([]);
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [updateTable, setUpdateTable] = useState("");
+  const search = useRef<HTMLInputElement>(null);
+
+  function handleSearch() {
+    const filteredList: MenuItem[] = [];
+
+    for (let i = 0; i < copyOfMenuItems.length; i++) {
+      // Adds any items that contain matching characters to an array
+      if (copyOfMenuItems[i]._name.includes(search.current?.value || "")) {
+        filteredList.push(copyOfMenuItems[i]);
+      }
+    }
+
+    if (filteredList.length > 0) {
+      // Sets the table view to show the filtered list of menu items
+      return setMenuItems(filteredList);
+    }
+    // Sets the table view to list all database menu items
+    return setMenuItems(copyOfMenuItems);
+  }
 
   useEffect(() => {
+    const arrayOfMenuItems: MenuItem[] = []; // Will be passed into the setMenuItems
+
     // API call to get the menu items
     fetch("http://localhost:3001/api/v1/menu-items")
       .then((response) => {
@@ -55,11 +76,12 @@ function MenuPage() {
           arrayOfMenuItems.push(menuItemObj);
         }
         setMenuItems(arrayOfMenuItems);
+        setCopyOfMenuItems(arrayOfMenuItems);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [updateTable]);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -67,10 +89,14 @@ function MenuPage() {
         <h2 className={styles["table-name"]}>Menu Items</h2>
         <div>
           <input
+            ref={search}
             type="text"
             placeholder={"Search"}
+            id="search"
+            name="search"
             maxLength={50}
             className={styles["search-bar"]}
+            onInput={() => handleSearch()}
           ></input>
         </div>
       </div>

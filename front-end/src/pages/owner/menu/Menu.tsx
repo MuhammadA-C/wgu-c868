@@ -17,6 +17,7 @@ interface IMenuItem {
   price: number;
 }
 
+// React Menu Page Component //
 function MenuPage() {
   const arrayOfMenuItems: MenuItem[] = []; // Will be passed into the setMenuItems
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
