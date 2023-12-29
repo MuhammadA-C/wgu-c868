@@ -47,7 +47,7 @@ function MenuPage() {
           return response.json();
         } else if (response.status == 204) {
           /* 
-            Returning back an empty object when the API returns back a 204 for no data in database.
+            Returns back an empty object when the API returns back a 204 for no data in database.
             This is needed so that the UI updates to display an empty table.
           */
           let data: IMenuItemJSON = {

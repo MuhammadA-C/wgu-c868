@@ -3,6 +3,8 @@ import MenuItem from "../../../model/MenuItem";
 import styles from "./CheckOut.module.css";
 import Table from "../../../components/table-3/Table";
 import LocalStorageKeys from "../../../helper/LocalStorageKeys";
+import generateOrderID from "../../../helper/generate-order-id";
+import { error } from "console";
 
 // Note: Need to add order to the database when the user clicks order!
 
@@ -64,9 +66,98 @@ function CheckOutPage() {
   const [updateTable, setUpdateTable] = useState("");
   const [totalItems, setTotalItems] = useState(getTotalItemsInCart());
   const [subTotal, setSubTotal] = useState("0");
+  const [orderItem, setOrderItem] = useState(0); // Used to trigger the API call to place the order
+  const [numberOfAPIRetries, setNumberOfAPIRetries] = useState(0);
+
+  //Note: Need to reset the number of API retries
+
+  const MAX_API_RETIRES: number = 5;
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
+
+  useEffect(() => {
+    // Stops code below from being triggered if the order button has not been pressed
+    if (orderItem == 0) {
+      return;
+    }
+
+    // Stops code below from being triggered if no items are in the cart based on subtotal price
+    if (Number(subTotal) <= 0) {
+      return;
+    }
+
+    const orderID: string = generateOrderID(); // Creates the order id
+    const todaysDate = new Date().toJSON(); // Gets todays date and time
+    const arrayOfPromises = []; // Holds all of the promises returned from the API calls
+    const cart = JSON.parse(
+      sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
+    ); // Reference to the cart object in session storage
+
+    /* Note: I will need to have a trigger to re-run this in case the order id is taken */
+
+    fetch("http://localhost:3001/api/v1/order-ids", {
+      method: "POST",
+      body: JSON.stringify({
+        order_id: orderID,
+        customer_id: 1,
+        order_status: "Placed",
+        order_placed_date: todaysDate,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.status == 201) {
+          return response.json();
+        } else if (numberOfAPIRetries < MAX_API_RETIRES) {
+          setOrderItem(orderItem + 1); // Triggers this useEffect code to be re-run
+          setNumberOfAPIRetries(numberOfAPIRetries + 1); // Keeps track of the number of re-runs
+          return;
+        } else {
+          throw new Error("Error: " + response.statusText);
+        }
+      })
+      .then(() => {
+        // Loops through each of the items in the cart object in session storage
+        for (const key in cart) {
+          // API call to get the name and price of the menu item
+          fetch(`http://localhost:3001/api/v1/menu-items/${Number(key)}`)
+            .then((response) => {
+              if (response.status == 200) {
+                return response.json();
+              }
+            })
+            .then((data) => {
+              const name: string = data.data[0].name;
+              const price: number = Number(data.data[0].price);
+              const quantity: number = Number(cart[key]);
+
+              /*arrayOfPromises.push(
+                fetch("http://localhost:3001/api/v1/ordered-items", {
+                  method: "POST",
+                  body: JSON.stringify({
+                    order_id: orderID,
+                    menu_item_name: name,
+                    price: price,
+                    quantity: quantity,
+                  }),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                })
+              );*/
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [orderItem]);
 
   useEffect(() => {
     let cartKeys: string[];
@@ -142,7 +233,13 @@ function CheckOutPage() {
         <h3>Subtotal: ${subTotal}</h3>
         <h3>Fees & Estimated Taxes: $0.0</h3>
         <h3>Total: ${subTotal}</h3>
-        <button>Order</button>
+        <button
+          onClick={() => {
+            setOrderItem(orderItem + 1);
+          }}
+        >
+          Order
+        </button>
       </div>
     </div>
   );
