@@ -20,16 +20,18 @@ interface IMenuItem {
 
 function CheckOutPage() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [updateTable, setUpdateTable] = useState("");
+  const cart = JSON.parse(
+    sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
+  );
 
   useEffect(() => {
     let cartKeys: string[];
     const arrayOfMenuItems: MenuItem[] = []; // Will be passed into the setMenuItems
-    const cart = JSON.parse(
-      sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
-    );
 
     // Skips the code below if no items are in the cart object in session storage
     if (Object.keys(cart).length == 0) {
+      setMenuItems([]); // Need to set the menu items to an empty array when no items are in the cart
       return;
     }
 
@@ -41,10 +43,7 @@ function CheckOutPage() {
         if (response.status == 200) {
           return response.json();
         } else if (response.status == 204) {
-          /* 
-            Returning back an empty object when the API returns back a 204 for no data in database.
-            This is needed so that the UI updates to display an empty table.
-          */
+          // Returns an empty object when the API returns back a 204 for no data in database.
           let data: IMenuItemJSON = {
             status: String(response.status),
             results: 0,
@@ -80,14 +79,14 @@ function CheckOutPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [updateTable]);
 
   return (
     <div className={styles.container}>
       <div className={styles["table-nav"]}>
         <h2 className={styles["table-name"]}>Menu Items</h2>
       </div>
-      <Table tableItems={menuItems}></Table>
+      <Table tableItems={menuItems} setUpdateTable={setUpdateTable}></Table>
     </div>
   );
 }

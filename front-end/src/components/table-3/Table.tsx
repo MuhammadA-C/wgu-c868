@@ -3,10 +3,6 @@ import LocalStorageKeys from "../../helper/LocalStorageKeys";
 import styles from "./Table.module.css";
 import MenuItem from "../../model/MenuItem";
 
-interface Props {
-  tableItems: MenuItem[];
-}
-
 function setCountOnPageLoad(itemID: string) {
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
@@ -57,7 +53,11 @@ function increaseCount(itemID: string, setCount: Function) {
   setCount(cart2[itemID]);
 }
 
-function decreaseCount(itemID: string, setCount: Function) {
+function decreaseCount(
+  itemID: string,
+  setCount: Function,
+  setUpdateTable: Function
+) {
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
@@ -81,7 +81,7 @@ function decreaseCount(itemID: string, setCount: Function) {
       JSON.stringify(cart)
     ); // Updates the session storage by removing the property
 
-    setCount(0);
+    setUpdateTable(`${itemID}`);
     return;
   }
 
@@ -102,10 +102,12 @@ function TableItem({
   item,
   itemID,
   price,
+  setUpdateTable,
 }: {
   item: string;
   itemID: number | undefined;
   price: string;
+  setUpdateTable: Function;
 }) {
   const [count, setCount] = useState(setCountOnPageLoad(String(itemID)));
 
@@ -118,7 +120,11 @@ function TableItem({
           +
         </button>
         <h2>{count}</h2>
-        <button onClick={() => decreaseCount(String(itemID), setCount)}>
+        <button
+          onClick={() =>
+            decreaseCount(String(itemID), setCount, setUpdateTable)
+          }
+        >
           -
         </button>
       </div>
@@ -126,8 +132,13 @@ function TableItem({
   );
 }
 
+interface Props {
+  tableItems: MenuItem[];
+  setUpdateTable: Function;
+}
+
 //React Component creates the table
-function Table({ tableItems }: Props) {
+function Table({ tableItems, setUpdateTable }: Props) {
   return (
     <div className={styles.table}>
       {tableItems.map((item) => (
@@ -136,6 +147,7 @@ function Table({ tableItems }: Props) {
           key={item._menuItemID}
           itemID={item._menuItemID}
           price={String(item.price)}
+          setUpdateTable={setUpdateTable}
         />
       ))}
     </div>
