@@ -24,7 +24,37 @@ function setCountOnPageLoad(itemID: string) {
   return cart[itemID];
 }
 
-function increaseCount(itemID: string, setCount: Function) {
+function getSubTotal(menuItems: MenuItem[]): number {
+  let subTotal = 0;
+  const cart = JSON.parse(
+    sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
+  );
+
+  if (Object.keys(cart).length == 0) {
+    return subTotal;
+  }
+
+  for (let i = 0; i < menuItems.length; i++) {
+    // Skips the item in the array if it is not present in the cart object
+    if (cart[String(menuItems[i]._menuItemID)] == undefined) {
+      continue;
+    }
+
+    const price: number = menuItems[i].price;
+    const count: number = cart[String(menuItems[i]._menuItemID)];
+
+    subTotal += price * count;
+  }
+
+  return Number(subTotal.toFixed(2)); // Limits the number to only having 2 decimal places max
+}
+
+function increaseCount(
+  itemID: string,
+  setCount: Function,
+  price: String,
+  menuItems: MenuItem[]
+) {
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
@@ -36,6 +66,8 @@ function increaseCount(itemID: string, setCount: Function) {
       LocalStorageKeys.customer_cart,
       JSON.stringify(cart)
     );
+  } else if (getSubTotal(menuItems) + Number(price) > 1000) {
+    return; // Limits the subtotal of all items to $1,000 max
   } else if (itemID in cart == false) {
     // Creates the property when it does not exist
     cart[itemID] = 1;
@@ -104,10 +136,12 @@ function TableItem({
   item,
   itemID,
   price,
+  menuItems,
 }: {
   item: string;
   itemID: number | undefined;
   price: string;
+  menuItems: MenuItem[];
 }) {
   const [count, setCount] = useState(setCountOnPageLoad(String(itemID)));
 
@@ -116,7 +150,11 @@ function TableItem({
       <p className={styles["table-item"]}>{item}</p>
       <p className={styles["table-item"]}>{`$${price}`}</p>
       <div className={styles["table-buttons-container"]}>
-        <button onClick={() => increaseCount(String(itemID), setCount)}>
+        <button
+          onClick={() =>
+            increaseCount(String(itemID), setCount, price, menuItems)
+          }
+        >
           +
         </button>
         <h2>{count}</h2>
@@ -138,6 +176,7 @@ function Table({ tableItems }: Props) {
           key={item._menuItemID}
           itemID={item._menuItemID}
           price={String(item.price)}
+          menuItems={tableItems}
         />
       ))}
     </div>

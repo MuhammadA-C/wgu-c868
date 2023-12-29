@@ -38,11 +38,14 @@ function getTotalItemsInCart(): number {
 }
 
 function getSubTotal(menuItems: MenuItem[]): number {
+  let subTotal = 0;
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
 
-  let subTotal = 0;
+  if (Object.keys(cart).length == 0) {
+    return subTotal;
+  }
 
   for (let i = 0; i < menuItems.length; i++) {
     let price: number = menuItems[i].price;
@@ -50,13 +53,16 @@ function getSubTotal(menuItems: MenuItem[]): number {
 
     subTotal += price * count;
   }
-  return subTotal;
+
+  return Number(subTotal.toFixed(2)); // Limits the number to only having 2 decimal places max
 }
 
 function increaseCount(
   itemID: string,
   setCount: Function,
-  setTotalItems: Function
+  setTotalItems: Function,
+  price: String,
+  menuItems: MenuItem[]
 ) {
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
@@ -69,6 +75,8 @@ function increaseCount(
       LocalStorageKeys.customer_cart,
       JSON.stringify(cart)
     );
+  } else if (getSubTotal(menuItems) + Number(price) > 1000) {
+    return; // Limits the subtotal of all items to $1,000
   } else if (itemID in cart == false) {
     // Creates the property when it does not exist
     cart[itemID] = 1;
@@ -168,7 +176,13 @@ function TableItem({
       <div className={styles["table-buttons-container"]}>
         <button
           onClick={() => {
-            increaseCount(String(itemID), setCount, setTotalItems);
+            increaseCount(
+              String(itemID),
+              setCount,
+              setTotalItems,
+              price,
+              menuItems
+            );
             setSubTotal(getSubTotal(menuItems));
           }}
         >

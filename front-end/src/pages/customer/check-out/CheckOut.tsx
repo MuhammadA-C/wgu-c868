@@ -38,11 +38,14 @@ function getTotalItemsInCart(): number {
 }
 
 function getSubTotal(menuItems: MenuItem[]): number {
+  let subTotal = 0;
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
 
-  let subTotal = 0;
+  if (Object.keys(cart).length == 0) {
+    return subTotal;
+  }
 
   for (let i = 0; i < menuItems.length; i++) {
     let price: number = menuItems[i].price;
@@ -50,14 +53,15 @@ function getSubTotal(menuItems: MenuItem[]): number {
 
     subTotal += price * count;
   }
-  return subTotal;
+
+  return Number(subTotal.toFixed(2)); // Limits the number to only having 2 decimal places max
 }
 
 function CheckOutPage() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [updateTable, setUpdateTable] = useState("");
   const [totalItems, setTotalItems] = useState(getTotalItemsInCart());
-  const [subTotal, setSubTotal] = useState("");
+  const [subTotal, setSubTotal] = useState("0");
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
