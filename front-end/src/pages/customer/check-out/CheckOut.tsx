@@ -18,9 +18,29 @@ interface IMenuItem {
   price: number;
 }
 
+function getTotalItemsInCart(): number {
+  const cart = JSON.parse(
+    sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
+  );
+
+  if (Object.keys(cart).length == 0) {
+    return 0;
+  }
+
+  const values = Object.values(cart);
+  let total = 0;
+
+  for (let i = 0; i < values.length; i++) {
+    total += Number(values[i]);
+  }
+
+  return total;
+}
+
 function CheckOutPage() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [updateTable, setUpdateTable] = useState("");
+  const [totalItems, setTotalItems] = useState(getTotalItemsInCart());
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
@@ -84,9 +104,13 @@ function CheckOutPage() {
   return (
     <div className={styles.container}>
       <div className={styles["table-nav"]}>
-        <h2 className={styles["table-name"]}>Menu Items</h2>
+        <h2 className={styles["table-name"]}>Total Items: {totalItems}</h2>
       </div>
-      <Table tableItems={menuItems} setUpdateTable={setUpdateTable}></Table>
+      <Table
+        tableItems={menuItems}
+        setUpdateTable={setUpdateTable}
+        setTotalItems={setTotalItems}
+      ></Table>
     </div>
   );
 }
