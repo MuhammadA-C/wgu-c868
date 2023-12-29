@@ -69,8 +69,6 @@ function CheckOutPage() {
   const [orderItem, setOrderItem] = useState(0); // Used to trigger the API call to place the order
   const [numberOfAPIRetries, setNumberOfAPIRetries] = useState(0);
 
-  //Note: Need to reset the number of API retries
-
   const MAX_API_RETIRES: number = 5;
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
@@ -89,13 +87,12 @@ function CheckOutPage() {
 
     const orderID: string = generateOrderID(); // Creates the order id
     const todaysDate = new Date().toJSON(); // Gets todays date and time
-    const arrayOfPromises = []; // Holds all of the promises returned from the API calls
+    const arrayOfPromises: Promise<any>[] = []; // Holds all of the promises returned from the API calls
     const cart = JSON.parse(
       sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
     ); // Reference to the cart object in session storage
 
-    /* Note: I will need to have a trigger to re-run this in case the order id is taken */
-
+    // API call to add order id to the order status database table
     fetch("http://localhost:3001/api/v1/order-ids", {
       method: "POST",
       body: JSON.stringify({
@@ -134,7 +131,8 @@ function CheckOutPage() {
               const price: number = Number(data.data[0].price);
               const quantity: number = Number(cart[key]);
 
-              /*arrayOfPromises.push(
+              // API call to add the item to the ordered items database table
+              arrayOfPromises.push(
                 fetch("http://localhost:3001/api/v1/ordered-items", {
                   method: "POST",
                   body: JSON.stringify({
@@ -147,12 +145,22 @@ function CheckOutPage() {
                     "Content-Type": "application/json",
                   },
                 })
-              );*/
+              );
             })
             .catch((error) => {
               console.log(error);
             });
         }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // Waits for all of the API calls to add to the ordered items database table finishes
+    Promise.all(arrayOfPromises)
+      .then(() => {
+        setNumberOfAPIRetries(0);
+        sessionStorage.removeItem(LocalStorageKeys.customer_cart); // Deletes the cart from session storage
       })
       .catch((error) => {
         console.log(error);
