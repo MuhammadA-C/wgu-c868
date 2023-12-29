@@ -37,6 +37,22 @@ function getTotalItemsInCart(): number {
   return total;
 }
 
+function getSubTotal(menuItems: MenuItem[]): number {
+  const cart = JSON.parse(
+    sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
+  );
+
+  let subTotal = 0;
+
+  for (let i = 0; i < menuItems.length; i++) {
+    let price: number = menuItems[i].price;
+    let count: number = cart[String(menuItems[i]._menuItemID)];
+
+    subTotal += price * count;
+  }
+  return subTotal;
+}
+
 function increaseCount(
   itemID: string,
   setCount: Function,
@@ -132,12 +148,16 @@ function TableItem({
   price,
   setUpdateTable,
   setTotalItems,
+  setSubTotal,
+  menuItems,
 }: {
   item: string;
   itemID: number | undefined;
   price: string;
   setUpdateTable: Function;
   setTotalItems: Function;
+  setSubTotal: Function;
+  menuItems: MenuItem[];
 }) {
   const [count, setCount] = useState(setCountOnPageLoad(String(itemID)));
 
@@ -147,20 +167,24 @@ function TableItem({
       <p className={styles["table-item"]}>{`$${price}`}</p>
       <div className={styles["table-buttons-container"]}>
         <button
-          onClick={() => increaseCount(String(itemID), setCount, setTotalItems)}
+          onClick={() => {
+            increaseCount(String(itemID), setCount, setTotalItems);
+            setSubTotal(getSubTotal(menuItems));
+          }}
         >
           +
         </button>
         <h2>{count}</h2>
         <button
-          onClick={() =>
+          onClick={() => {
             decreaseCount(
               String(itemID),
               setCount,
               setUpdateTable,
               setTotalItems
-            )
-          }
+            );
+            setSubTotal(getSubTotal(menuItems));
+          }}
         >
           -
         </button>
@@ -173,10 +197,16 @@ interface Props {
   tableItems: MenuItem[];
   setUpdateTable: Function;
   setTotalItems: Function;
+  setSubTotal: Function;
 }
 
 //React Component creates the table
-function Table({ tableItems, setUpdateTable, setTotalItems }: Props) {
+function Table({
+  tableItems,
+  setUpdateTable,
+  setTotalItems,
+  setSubTotal,
+}: Props) {
   return (
     <div className={styles.table}>
       {tableItems.map((item) => (
@@ -187,6 +217,8 @@ function Table({ tableItems, setUpdateTable, setTotalItems }: Props) {
           price={String(item.price)}
           setUpdateTable={setUpdateTable}
           setTotalItems={setTotalItems}
+          setSubTotal={setSubTotal}
+          menuItems={tableItems}
         />
       ))}
     </div>

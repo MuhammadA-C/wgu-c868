@@ -1,5 +1,5 @@
 .table {
-  width: 65rem;
+  width: 45rem;
 }
 
 .table {
@@ -15,9 +15,8 @@
 
 /* Below CSS is for the table items */
 .table-item {
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding-left: 2rem;
+  font-size: 1.2rem;
+  padding-left: 1rem;
 }
 
 /*Resets any styling on the paragraph element which is used for table items */
@@ -43,6 +42,6 @@ p {
 
 .table-buttons-container {
   display: flex;
-  padding-right: 2rem;
-  gap: 2rem;
+  padding-right: 1rem;
+  gap: 1.5rem;
 }

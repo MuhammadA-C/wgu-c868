@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 65rem;
+  width: 45rem;
   height: 5rem;
   border-top-right-radius: 1.25rem;
   border-top-left-radius: 1.25rem;
@@ -12,9 +12,39 @@
 
 /* Table Container */
 .container {
-  margin-top: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.main-container {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Summary Section */
+.summary-container {
+  display: flex;
+  flex-direction: column;
+  width: 40rem;
+  height: 35rem;
+  border-radius: 2rem;
+  background-color: rgb(191, 246, 255);
+}
+
+.summary-container > :first-child {
+  margin-top: 7rem;
+}
+
+.summary-container > * {
+  margin-left: 2rem;
+}
+
+.summary-container > :last-child {
+  margin-top: 2rem;
+  width: 8rem;
 }

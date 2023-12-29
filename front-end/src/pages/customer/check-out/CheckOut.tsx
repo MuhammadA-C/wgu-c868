@@ -37,10 +37,27 @@ function getTotalItemsInCart(): number {
   return total;
 }
 
+function getSubTotal(menuItems: MenuItem[]): number {
+  const cart = JSON.parse(
+    sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
+  );
+
+  let subTotal = 0;
+
+  for (let i = 0; i < menuItems.length; i++) {
+    let price: number = menuItems[i].price;
+    let count: number = cart[String(menuItems[i]._menuItemID)];
+
+    subTotal += price * count;
+  }
+  return subTotal;
+}
+
 function CheckOutPage() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [updateTable, setUpdateTable] = useState("");
   const [totalItems, setTotalItems] = useState(getTotalItemsInCart());
+  const [subTotal, setSubTotal] = useState("");
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
@@ -95,6 +112,7 @@ function CheckOutPage() {
           }
         }
         setMenuItems(arrayOfMenuItems);
+        setSubTotal(String(getSubTotal(arrayOfMenuItems)));
       })
       .catch((error) => {
         console.log(error);
@@ -102,15 +120,24 @@ function CheckOutPage() {
   }, [updateTable]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles["table-nav"]}>
-        <h2 className={styles["table-name"]}>Total Items: {totalItems}</h2>
+    <div className={styles["main-container"]}>
+      <div className={styles.container}>
+        <div className={styles["table-nav"]}>
+          <h2 className={styles["table-name"]}>Total Items: {totalItems}</h2>
+        </div>
+        <Table
+          tableItems={menuItems}
+          setUpdateTable={setUpdateTable}
+          setTotalItems={setTotalItems}
+          setSubTotal={setSubTotal}
+        ></Table>
       </div>
-      <Table
-        tableItems={menuItems}
-        setUpdateTable={setUpdateTable}
-        setTotalItems={setTotalItems}
-      ></Table>
+      <div className={styles["summary-container"]}>
+        <h3>Subtotal: ${subTotal}</h3>
+        <h3>Fees & Estimated Taxes: $0.0</h3>
+        <h3>Total: ${subTotal}</h3>
+        <button>Order</button>
+      </div>
     </div>
   );
 }
