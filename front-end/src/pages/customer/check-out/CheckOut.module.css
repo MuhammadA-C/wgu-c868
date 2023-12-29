@@ -1,0 +1,43 @@
+/* Table Navigation Bar */
+.table-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 65rem;
+  height: 5rem;
+  border-top-right-radius: 1.25rem;
+  border-top-left-radius: 1.25rem;
+  background-color: rgb(105, 198, 228);
+}
+
+/* Table Container */
+.container {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Table Name */
+h2.table-name {
+  margin-left: 2rem;
+}
+
+/* Search Bar */
+input.search-bar {
+  width: 20rem;
+  height: 1.8rem;
+  margin-right: 2rem;
+}
+
+div.table-column-names {
+  display: flex;
+  background-color: rgb(88, 172, 200);
+  width: 65rem;
+  gap: 22rem;
+}
+
+.table-column-names > :first-child {
+  margin-left: 2rem;
+}

@@ -3,6 +3,7 @@ import styles from "./Table.module.css";
 import { useEffect, useState } from "react";
 import LocalStorageKeys from "../../helper/LocalStorageKeys";
 
+/* Table for the Owner Menu Table */
 interface Props {
   tableItems: MenuItem[];
   setUpdateTable: Function;

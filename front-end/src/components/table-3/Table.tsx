@@ -1,9 +1,7 @@
 import { useState } from "react";
-import MenuItem from "../../model/MenuItem";
-import styles from "./Table.module.css";
 import LocalStorageKeys from "../../helper/LocalStorageKeys";
-
-/* Table for the Customer Menu Table */
+import styles from "./Table.module.css";
+import MenuItem from "../../model/MenuItem";
 
 interface Props {
   tableItems: MenuItem[];
