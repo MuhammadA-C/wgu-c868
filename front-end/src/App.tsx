@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { RootLayout as CustomerRootLayout } from "./pages/customer/Root";
 import { RootLayout as OwnerRootLayout } from "./pages/owner/Root";
 
-import HomePage from "./pages/customer/home/Home";
 import { MenuPage as CustomerMenuPage } from "./pages/customer/menu/Menu";
 import { MenuPage as OwnerMenuPage } from "./pages/owner/menu/Menu";
 import { OrdersPage as CustomerOrdersPage } from "./pages/customer/orders/Orders";

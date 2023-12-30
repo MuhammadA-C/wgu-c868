@@ -4,7 +4,7 @@ import "./navigation.css";
 function OwnerNavigation() {
   return (
     <header>
-      <h1>Name of Site</h1>
+      <h1>WGU C868 PA</h1>
       <nav>
         <ul>
           <li>
