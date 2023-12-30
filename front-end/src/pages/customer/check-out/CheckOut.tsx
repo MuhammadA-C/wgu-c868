@@ -4,9 +4,6 @@ import styles from "./CheckOut.module.css";
 import Table from "../../../components/table-3/Table";
 import LocalStorageKeys from "../../../helper/LocalStorageKeys";
 import generateOrderID from "../../../helper/generate-order-id";
-import { error } from "console";
-
-// Note: Need to add order to the database when the user clicks order!
 
 interface IMenuItemJSON {
   status: string;

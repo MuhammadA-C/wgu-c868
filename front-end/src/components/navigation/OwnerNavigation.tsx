@@ -8,10 +8,7 @@ function OwnerNavigation() {
       <nav>
         <ul>
           <li>
-            <Link to="/owner">Orders</Link>
-          </li>
-          <li>
-            <Link to="/owner/menu">Menu</Link>
+            <Link to="/owner">Menu</Link>
           </li>
           <li>
             <Link to="/owner/reports">Reports</Link>
