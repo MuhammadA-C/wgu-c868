@@ -110,7 +110,7 @@ function UpdateMenuItemPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, [saveChanges]); 
+  }, [saveChanges]);
 
   function handleSubmited() {
     // Checks to see if there are any empty input fields
@@ -125,6 +125,24 @@ function UpdateMenuItemPage() {
     ) {
       // Shows the error message telling the user to fill in all input fields
       setIsHidden(false);
+      return;
+    }
+
+    // Checks if the price is greater than $0 and less than $150
+    if (
+      Number(price.current.value) >= 151 ||
+      Number(price.current.value) <= 0
+    ) {
+      return;
+    }
+
+    // Checks if the name is longer than 50 characters
+    if (name.current.value.length > 50) {
+      return;
+    }
+
+    // Checks if the description is longer than 255 characters
+    if (description.current.value.length > 255) {
       return;
     }
 

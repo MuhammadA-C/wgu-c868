@@ -86,6 +86,24 @@ function AddMenuItemPage() {
       return;
     }
 
+    // Checks if the price is greater than $0 and less than $150
+    if (
+      Number(price.current.value) >= 151 ||
+      Number(price.current.value) <= 0
+    ) {
+      return;
+    }
+
+    // Checks if the name is longer than 50 characters
+    if (name.current.value.length > 50) {
+      return;
+    }
+
+    // Checks if the description is longer than 255 characters
+    if (description.current.value.length > 255) {
+      return;
+    }
+
     // Sets the item to add to the database which will cause the API call to trigger to add it
     setAddMenuItem(
       new MenuItem(
