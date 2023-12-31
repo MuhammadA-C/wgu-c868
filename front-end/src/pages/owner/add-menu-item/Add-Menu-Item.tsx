@@ -61,7 +61,7 @@ function AddMenuItemPage() {
       .then((response) => {
         // Checks to see if the item was added successfully to take the user back
         if (response.status == 201) {
-          return (window.location.href = "/owner/menu");
+          return (window.location.href = "/owner/");
         }
       })
       .catch((error) => {
