@@ -32,7 +32,7 @@ function MenuPage() {
           return response.json();
         } else if (response.status == 204) {
           /* 
-            Returning back an empty object when the API returns back a 204 for no data in database.
+            Returns an empty object when the API returns back a 204 for no data in database.
             This is needed so that the UI updates to display an empty table.
           */
           let data: IMenuItemJSON = {
@@ -47,7 +47,6 @@ function MenuPage() {
       })
       .then((data: IMenuItemJSON) => {
         for (let i = 0; i < data.data.length; i++) {
-          // Destructering the object to get the properties
           const { menu_item_id, name, description, picture, price } =
             data.data[i];
 

@@ -22,7 +22,6 @@ function OrdersPage() {
       })
       .then((data) => {
         if (data == 204) {
-          // I'll probably need to return an empty list back
           return;
         }
 

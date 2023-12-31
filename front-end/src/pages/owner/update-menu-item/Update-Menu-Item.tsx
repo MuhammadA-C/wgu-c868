@@ -110,7 +110,7 @@ function UpdateMenuItemPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, [saveChanges]); // need a new usestate to trigger update
+  }, [saveChanges]); 
 
   function handleSubmited() {
     // Checks to see if there are any empty input fields

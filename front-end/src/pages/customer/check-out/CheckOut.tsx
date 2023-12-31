@@ -210,7 +210,6 @@ function CheckOutPage() {
               continue;
             }
 
-            // Destructering the object to get the properties
             const { menu_item_id, name, description, picture, price } =
               data.data[i];
 
