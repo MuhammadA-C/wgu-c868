@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "./Reports.module.css";
 import Table from "../../../components/table-5/Table";
 import OrderedItem from "../../../model/OrderedItem";
+import back_end_api_url from "../../../helper/Back-End";
 
 function ReportsPage() {
   const [orderedItems, setOrderedItems] = useState<OrderedItem[]>([]);
@@ -10,7 +11,7 @@ function ReportsPage() {
   useEffect(() => {
     const arrayOfOrderedItems: OrderedItem[] = [];
 
-    fetch("http://localhost:3001/api/v1/ordered-items")
+    fetch(`${back_end_api_url}/api/v1/ordered-items`)
       .then((response) => {
         if (response.status == 200) {
           return response.json();

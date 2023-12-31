@@ -2,6 +2,7 @@ import MenuItem from "../../model/MenuItem";
 import styles from "./Table.module.css";
 import { useEffect, useState } from "react";
 import LocalStorageKeys from "../../helper/LocalStorageKeys";
+import back_end_api_url from "../../helper/Back-End";
 
 /* Table for the Owner Menu Table */
 interface Props {
@@ -52,7 +53,7 @@ function Table({ tableItems, setUpdateTable }: Props) {
     }
 
     // Calls the API to delete the item from the database
-    fetch(`http://localhost:3001/api/v1/menu-items/${deleteItem}`, {
+    fetch(`${back_end_api_url}/api/v1/menu-items/${deleteItem}`, {
       method: "DELETE",
     })
       .then((response) => {

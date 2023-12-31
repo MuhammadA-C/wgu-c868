@@ -1,7 +1,7 @@
 import styles from "./Table.module.css";
 import OrderedItem from "../../model/OrderedItem";
 
-//React Component creates the table item
+/* React Component creates the table item */
 function TableItem({
   orderID,
   name,

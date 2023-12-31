@@ -2,6 +2,7 @@ import styles from "./Add-Menu-Item.module.css";
 import { useEffect, useState, useRef } from "react";
 import MenuItem from "../../../model/MenuItem";
 import Modal from "../../../components/select-image-modal/Modal";
+import back_end_api_url from "../../../helper/Back-End";
 
 function toggleModal(openModal: boolean, setOpenModal: Function) {
   if (openModal) {
@@ -46,7 +47,7 @@ function AddMenuItemPage() {
     }
 
     // API call to create the menu item
-    fetch("http://localhost:3001/api/v1/menu-items", {
+    fetch(`${back_end_api_url}/api/v1/menu-items`, {
       method: "POST",
       body: JSON.stringify({
         name: addMenuItem._name,

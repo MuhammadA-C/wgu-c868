@@ -2,6 +2,7 @@ import styles from "./Update-Menu-Item.module.css";
 import { useEffect, useState, useRef } from "react";
 import LocalStorageKeys from "../../../helper/LocalStorageKeys";
 import Modal from "../../../components/select-image-modal/Modal";
+import back_end_api_url from "../../../helper/Back-End";
 
 function toggleModal(openModal: boolean, setOpenModal: Function) {
   if (openModal) {
@@ -22,8 +23,7 @@ function setSearchValue(
 }
 
 function handleCancelBtn() {
-  // Need to remove the selected menu item from local storage because it is no longer needed
-  localStorage.removeItem(LocalStorageKeys.selected_menu_item_id);
+  localStorage.removeItem(LocalStorageKeys.selected_menu_item_id); // Need to remove the selected menu item from local storage because it is no longer needed
   window.location.href = "/owner/";
 }
 
@@ -53,7 +53,7 @@ function UpdateMenuItemPage() {
   useEffect(() => {
     // Gets the menu item for the selected item to update
     fetch(
-      `http://localhost:3001/api/v1/menu-items/${localStorage.getItem(
+      `${back_end_api_url}/api/v1/menu-items/${localStorage.getItem(
         LocalStorageKeys.selected_menu_item_id
       )}`
     )
@@ -89,7 +89,7 @@ function UpdateMenuItemPage() {
     }
 
     // API call to update the menu item
-    fetch(`http://localhost:3001/api/v1/menu-items/${itemID}`, {
+    fetch(`${back_end_api_url}/api/v1/menu-items/${itemID}`, {
       method: "PATCH",
       body: JSON.stringify({
         name: itemName,

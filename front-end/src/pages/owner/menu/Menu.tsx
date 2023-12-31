@@ -2,6 +2,7 @@ import Table from "../../../components/table/Table";
 import styles from "./Menu.module.css";
 import MenuItem from "../../../model/MenuItem";
 import { useEffect, useState } from "react";
+import back_end_api_url from "../../../helper/Back-End";
 
 interface IMenuItemJSON {
   status: string;
@@ -25,7 +26,7 @@ function MenuPage() {
 
   useEffect(() => {
     // API call to get the menu items
-    fetch("http://localhost:3001/api/v1/menu-items")
+    fetch(`${back_end_api_url}/api/v1/menu-items`)
       .then((response) => {
         if (response.status == 200) {
           return response.json();

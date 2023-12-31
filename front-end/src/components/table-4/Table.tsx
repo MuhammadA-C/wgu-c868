@@ -1,7 +1,7 @@
 import styles from "./Table.module.css";
 import OrderID from "../../model/OrderID";
 
-//React Component creates the table item
+/* React Component creates the table item */
 function TableItem({
   orderID,
   status,

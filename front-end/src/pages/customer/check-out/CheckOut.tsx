@@ -4,6 +4,7 @@ import styles from "./CheckOut.module.css";
 import Table from "../../../components/table-3/Table";
 import LocalStorageKeys from "../../../helper/LocalStorageKeys";
 import generateOrderID from "../../../helper/generate-order-id";
+import back_end_api_url from "../../../helper/Back-End";
 
 interface IMenuItemJSON {
   status: string;
@@ -93,7 +94,7 @@ function CheckOutPage() {
     ); // Reference to the cart object in session storage
 
     // API call to add order id to the order status database table
-    fetch("http://localhost:3001/api/v1/order-ids", {
+    fetch(`${back_end_api_url}/api/v1/order-ids`, {
       method: "POST",
       body: JSON.stringify({
         order_id: orderID,
@@ -120,7 +121,7 @@ function CheckOutPage() {
         // Loops through each of the items in the cart object in session storage
         for (const key in cart) {
           // API call to get the name and price of the menu item
-          fetch(`http://localhost:3001/api/v1/menu-items/${Number(key)}`)
+          fetch(`${back_end_api_url}/api/v1/menu-items/${Number(key)}`)
             .then((response) => {
               if (response.status == 200) {
                 return response.json();
@@ -133,7 +134,7 @@ function CheckOutPage() {
 
               // API call to add the item to the ordered items database table
               arrayOfPromises.push(
-                fetch("http://localhost:3001/api/v1/ordered-items", {
+                fetch(`${back_end_api_url}/api/v1/ordered-items`, {
                   method: "POST",
                   body: JSON.stringify({
                     order_id: orderID,
@@ -183,7 +184,7 @@ function CheckOutPage() {
     // Gets all keys for the cart object
     cartKeys = Object.keys(cart);
 
-    fetch("http://localhost:3001/api/v1/menu-items")
+    fetch(`${back_end_api_url}/api/v1/menu-items`)
       .then((response) => {
         if (response.status == 200) {
           return response.json();

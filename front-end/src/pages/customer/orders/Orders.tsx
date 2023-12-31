@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Table from "../../../components/table-4/Table";
 import styles from "./Orders.module.css";
 import OrderID from "../../../model/OrderID";
+import back_end_api_url from "../../../helper/Back-End";
 
 function OrdersPage() {
   const [orders, setOrders] = useState<OrderID[]>([]);
@@ -10,7 +11,7 @@ function OrdersPage() {
   useEffect(() => {
     const arrayOfOrderIDs: OrderID[] = [];
 
-    fetch("http://localhost:3001/api/v1/order-ids")
+    fetch(`${back_end_api_url}/api/v1/order-ids`)
       .then((response) => {
         if (response.status == 200) {
           return response.json();
