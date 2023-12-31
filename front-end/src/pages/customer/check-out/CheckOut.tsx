@@ -237,7 +237,7 @@ function CheckOutPage() {
       </div>
       <div className={styles["summary-container"]}>
         <h3>Subtotal: ${subTotal}</h3>
-        <h3>Fees & Estimated Taxes: $0.0</h3>
+        <h3>Fees & Estimated Taxes: $0</h3>
         <h3>Total: ${subTotal}</h3>
         <button
           onClick={() => {
