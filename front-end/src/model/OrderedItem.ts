@@ -60,3 +60,5 @@ class OrderedItem {
     this._quantity = quantity;
   }
 }
+
+export default OrderedItem;

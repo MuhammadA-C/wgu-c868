@@ -158,6 +158,7 @@ function CheckOutPage() {
       .then(() => {
         setNumberOfAPIRetries(0);
         sessionStorage.removeItem(LocalStorageKeys.customer_cart); // Deletes the cart from session storage
+        /* NEED TO CLEAR THE ITEMS ON THE SCREEN BY TRIGGERING A REFRESH  */
       })
       .catch((error) => {
         console.log(error);

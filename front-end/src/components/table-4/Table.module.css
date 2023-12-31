@@ -25,6 +25,12 @@ p {
   padding: 0;
 }
 
+.table-item-container {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+}
+
 .table-item-container:first-child {
   padding-top: 2rem;
 }
