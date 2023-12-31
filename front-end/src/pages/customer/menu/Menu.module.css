@@ -41,3 +41,8 @@ div.table-column-names {
 .table-column-names > :first-child {
   margin-left: 2rem;
 }
+
+h2.order-limit-message {
+  color: red;
+  margin-top: 2rem;
+}

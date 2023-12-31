@@ -48,3 +48,15 @@
   margin-top: 2rem;
   width: 8rem;
 }
+
+h2.cart-is-empty,
+.order-limit-message {
+  color: red;
+}
+
+.cart-is-empty-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}

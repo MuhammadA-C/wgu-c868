@@ -7,6 +7,7 @@ import LocalStorageKeys from "../../helper/LocalStorageKeys";
 
 interface Props {
   tableItems: MenuItem[];
+  setOrderLimitMessage: Function;
 }
 
 function setCountOnPageLoad(itemID: string) {
@@ -53,7 +54,8 @@ function increaseCount(
   itemID: string,
   setCount: Function,
   price: String,
-  menuItems: MenuItem[]
+  menuItems: MenuItem[],
+  setOrderLimitMessage: Function
 ) {
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
@@ -67,6 +69,7 @@ function increaseCount(
       JSON.stringify(cart)
     );
   } else if (getSubTotal(menuItems) + Number(price) > 1000) {
+    setOrderLimitMessage(false);
     return; // Limits the subtotal of all items to $1,000 max
   } else if (itemID in cart == false) {
     // Creates the property when it does not exist
@@ -84,6 +87,8 @@ function increaseCount(
     );
   }
 
+  setOrderLimitMessage(true);
+
   const cart2 = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
@@ -91,10 +96,16 @@ function increaseCount(
   setCount(cart2[itemID]);
 }
 
-function decreaseCount(itemID: string, setCount: Function) {
+function decreaseCount(
+  itemID: string,
+  setCount: Function,
+  setOrderLimitMessage: Function
+) {
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
+
+  setOrderLimitMessage(true);
 
   // Checks if the cart object exists
   if (Object.keys(cart).length == 0) {
@@ -137,11 +148,13 @@ function TableItem({
   itemID,
   price,
   menuItems,
+  setOrderLimitMessage,
 }: {
   item: string;
   itemID: number | undefined;
   price: string;
   menuItems: MenuItem[];
+  setOrderLimitMessage: Function;
 }) {
   const [count, setCount] = useState(setCountOnPageLoad(String(itemID)));
 
@@ -152,13 +165,23 @@ function TableItem({
       <div className={styles["table-buttons-container"]}>
         <button
           onClick={() =>
-            increaseCount(String(itemID), setCount, price, menuItems)
+            increaseCount(
+              String(itemID),
+              setCount,
+              price,
+              menuItems,
+              setOrderLimitMessage
+            )
           }
         >
           +
         </button>
         <h2>{count}</h2>
-        <button onClick={() => decreaseCount(String(itemID), setCount)}>
+        <button
+          onClick={() =>
+            decreaseCount(String(itemID), setCount, setOrderLimitMessage)
+          }
+        >
           -
         </button>
       </div>
@@ -167,7 +190,7 @@ function TableItem({
 }
 
 //React Component creates the table
-function Table({ tableItems }: Props) {
+function Table({ tableItems, setOrderLimitMessage }: Props) {
   return (
     <div className={styles.table}>
       {tableItems.map((item) => (
@@ -177,6 +200,7 @@ function Table({ tableItems }: Props) {
           itemID={item._menuItemID}
           price={String(item.price)}
           menuItems={tableItems}
+          setOrderLimitMessage={setOrderLimitMessage}
         />
       ))}
     </div>

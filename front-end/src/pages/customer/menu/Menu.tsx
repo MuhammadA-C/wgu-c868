@@ -22,6 +22,7 @@ function MenuPage() {
   const [copyOfMenuItems, setCopyOfMenuItems] = useState<MenuItem[]>([]);
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const search = useRef<HTMLInputElement>(null);
+  const [orderLimitMessage, setOrderLimitMessage] = useState(true);
 
   function handleSearch() {
     const filteredList: MenuItem[] = [];
@@ -101,7 +102,13 @@ function MenuPage() {
         <h3>Price:</h3>
         <h3>Count:</h3>
       </div>
-      <Table tableItems={menuItems}></Table>
+      <Table
+        tableItems={menuItems}
+        setOrderLimitMessage={setOrderLimitMessage}
+      ></Table>
+      <h2 className={styles["order-limit-message"]} hidden={orderLimitMessage}>
+        You cannot add more than $1,000 worth of items to a single order
+      </h2>
     </div>
   );
 }

@@ -65,6 +65,8 @@ function CheckOutPage() {
   const [subTotal, setSubTotal] = useState("0");
   const [orderItem, setOrderItem] = useState(0); // Used to trigger the API call to place the order
   const [numberOfAPIRetries, setNumberOfAPIRetries] = useState(0);
+  const [isHidden, setIsHidden] = useState(true);
+  const [orderLimitMessage, setOrderLimitMessage] = useState(true);
 
   const MAX_API_RETIRES: number = 5;
   const cart = JSON.parse(
@@ -79,6 +81,7 @@ function CheckOutPage() {
 
     // Stops code below from being triggered if no items are in the cart based on subtotal price
     if (Number(subTotal) <= 0) {
+      setIsHidden(false);
       return;
     }
 
@@ -225,31 +228,45 @@ function CheckOutPage() {
   }, [updateTable]);
 
   return (
-    <div className={styles["main-container"]}>
-      <div className={styles.container}>
-        <div className={styles["table-nav"]}>
-          <h2 className={styles["table-name"]}>Total Items: {totalItems}</h2>
+    <>
+      <div className={styles["main-container"]}>
+        <div className={styles.container}>
+          <div className={styles["table-nav"]}>
+            <h2 className={styles["table-name"]}>Total Items: {totalItems}</h2>
+          </div>
+          <Table
+            tableItems={menuItems}
+            setUpdateTable={setUpdateTable}
+            setTotalItems={setTotalItems}
+            setSubTotal={setSubTotal}
+            setOrderLimitMessage={setOrderLimitMessage}
+          ></Table>
         </div>
-        <Table
-          tableItems={menuItems}
-          setUpdateTable={setUpdateTable}
-          setTotalItems={setTotalItems}
-          setSubTotal={setSubTotal}
-        ></Table>
+        <div className={styles["summary-container"]}>
+          <h3>Subtotal: ${subTotal}</h3>
+          <h3>Fees & Estimated Taxes: $0</h3>
+          <h3>Total: ${subTotal}</h3>
+          <button
+            onClick={() => {
+              setOrderItem(orderItem + 1);
+            }}
+          >
+            Order
+          </button>
+        </div>
       </div>
-      <div className={styles["summary-container"]}>
-        <h3>Subtotal: ${subTotal}</h3>
-        <h3>Fees & Estimated Taxes: $0</h3>
-        <h3>Total: ${subTotal}</h3>
-        <button
-          onClick={() => {
-            setOrderItem(orderItem + 1);
-          }}
+      <div className={styles["cart-is-empty-container"]}>
+        <h2 className={styles["cart-is-empty"]} hidden={isHidden}>
+          Cart is empty! Add items to the cart prior to hitting the order button
+        </h2>
+        <h2
+          className={styles["order-limit-message"]}
+          hidden={orderLimitMessage}
         >
-          Order
-        </button>
+          You cannot add more than $1,000 worth of items to a single order
+        </h2>
       </div>
-    </div>
+    </>
   );
 }
 

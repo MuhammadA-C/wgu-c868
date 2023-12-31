@@ -62,7 +62,8 @@ function increaseCount(
   setCount: Function,
   setTotalItems: Function,
   price: String,
-  menuItems: MenuItem[]
+  menuItems: MenuItem[],
+  setOrderLimitMessage: Function
 ) {
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
@@ -76,6 +77,7 @@ function increaseCount(
       JSON.stringify(cart)
     );
   } else if (getSubTotal(menuItems) + Number(price) > 1000) {
+    setOrderLimitMessage(false);
     return; // Limits the subtotal of all items to $1,000
   } else if (itemID in cart == false) {
     // Creates the property when it does not exist
@@ -93,6 +95,8 @@ function increaseCount(
     );
   }
 
+  setOrderLimitMessage(true);
+
   const cart2 = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
@@ -105,11 +109,14 @@ function decreaseCount(
   itemID: string,
   setCount: Function,
   setUpdateTable: Function,
-  setTotalItems: Function
+  setTotalItems: Function,
+  setOrderLimitMessage: Function
 ) {
   const cart = JSON.parse(
     sessionStorage.getItem(LocalStorageKeys.customer_cart) || "{}"
   );
+
+  setOrderLimitMessage(true);
 
   // Checks if the cart object exists
   if (Object.keys(cart).length == 0) {
@@ -158,6 +165,7 @@ function TableItem({
   setTotalItems,
   setSubTotal,
   menuItems,
+  setOrderLimitMessage,
 }: {
   item: string;
   itemID: number | undefined;
@@ -166,6 +174,7 @@ function TableItem({
   setTotalItems: Function;
   setSubTotal: Function;
   menuItems: MenuItem[];
+  setOrderLimitMessage: Function;
 }) {
   const [count, setCount] = useState(setCountOnPageLoad(String(itemID)));
 
@@ -181,7 +190,8 @@ function TableItem({
               setCount,
               setTotalItems,
               price,
-              menuItems
+              menuItems,
+              setOrderLimitMessage
             );
             setSubTotal(getSubTotal(menuItems));
           }}
@@ -195,7 +205,8 @@ function TableItem({
               String(itemID),
               setCount,
               setUpdateTable,
-              setTotalItems
+              setTotalItems,
+              setOrderLimitMessage
             );
             setSubTotal(getSubTotal(menuItems));
           }}
@@ -212,6 +223,7 @@ interface Props {
   setUpdateTable: Function;
   setTotalItems: Function;
   setSubTotal: Function;
+  setOrderLimitMessage: Function;
 }
 
 //React Component creates the table
@@ -220,6 +232,7 @@ function Table({
   setUpdateTable,
   setTotalItems,
   setSubTotal,
+  setOrderLimitMessage,
 }: Props) {
   return (
     <div className={styles.table}>
@@ -233,6 +246,7 @@ function Table({
           setTotalItems={setTotalItems}
           setSubTotal={setSubTotal}
           menuItems={tableItems}
+          setOrderLimitMessage={setOrderLimitMessage}
         />
       ))}
     </div>
