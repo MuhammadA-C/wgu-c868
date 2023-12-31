@@ -24,7 +24,7 @@ function setSearchValue(
 function handleCancelBtn() {
   // Need to remove the selected menu item from local storage because it is no longer needed
   localStorage.removeItem(LocalStorageKeys.selected_menu_item_id);
-  window.location.href = "/owner/menu";
+  window.location.href = "/owner/";
 }
 
 // Update Menu Item Page React Component //
@@ -104,7 +104,7 @@ function UpdateMenuItemPage() {
       .then((response) => {
         // Checks to see if the item was updated successfully to take the user back
         if (response.status == 200) {
-          return (window.location.href = "/owner/menu");
+          return (window.location.href = "/owner/");
         }
       })
       .catch((error) => {

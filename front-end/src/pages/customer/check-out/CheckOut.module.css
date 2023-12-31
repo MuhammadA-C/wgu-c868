@@ -7,7 +7,7 @@
   height: 5rem;
   border-top-right-radius: 1.25rem;
   border-top-left-radius: 1.25rem;
-  background-color: rgb(105, 198, 228);
+  background-color: rgb(188, 188, 188);
 }
 
 /* Table Container */
@@ -33,7 +33,7 @@
   width: 40rem;
   height: 35rem;
   border-radius: 2rem;
-  background-color: rgb(191, 246, 255);
+  background-color: rgb(188, 188, 188);
 }
 
 .summary-container > :first-child {

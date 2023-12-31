@@ -80,9 +80,3 @@ function MenuPage() {
 }
 
 export { MenuPage };
-
-/*
-  //Removed the filter drop down because may not add it to the project anymore
-    <Dropdown listItems={["Drink", "Desert", "Sea Food", "Pasta"]} />
-
-*/

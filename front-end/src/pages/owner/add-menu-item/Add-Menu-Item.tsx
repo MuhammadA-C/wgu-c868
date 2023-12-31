@@ -166,7 +166,7 @@ function AddMenuItemPage() {
             ></input>
             <button
               className={styles["cancel-btn"]}
-              onClick={() => (window.location.href = "/owner/menu")}
+              onClick={() => (window.location.href = "/owner/")}
             >
               Cancel
             </button>
