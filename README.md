@@ -17,9 +17,9 @@ WGU C868 Software Development Capstone - Front End
 
 ---
 
-## Back End
+## Back End (REST API)
 
-The Back End was created in a separate project repository
+The Back End (REST API) was created in a separate project repository
 
 Link-> https://github.com/MuhammadA-C/wgu-c868-back-end
 
