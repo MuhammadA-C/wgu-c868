@@ -62,7 +62,14 @@ The minimum requirements for the capstone project were:
 
 ## Future Improvements
 
-[NEED TO UPDATE]
+If I were to work on this capstone project more then I would:
+* Redesign the UI
+* Implement login functionality
+* Implement a payment process for the check out functionality
+* Implement functionality to change the status of orders placed
+* Deploy the front end and back end on AWS Elastic Beanstalk
+* Revise the image selection option to have more images to select from
+* Redesign the menu items screen for the customer view to show the image of each menu item
 
 ---
 
