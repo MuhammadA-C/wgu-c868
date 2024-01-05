@@ -43,6 +43,9 @@ The minimum requirements for the capstone project were:
 
 [NEED TO UPDATE]
 
+![Screenshot of a Figma design for the check out screen](https://github.com/MuhammadA-C/wgu-c868-front-end/blob/main/pictures/Check-Out-Screen-Customer.png)
+*Screenshot of a Figma design for the check out screen*
+
 ---
 
 ## Future Improvements
