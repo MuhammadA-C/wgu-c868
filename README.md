@@ -61,6 +61,8 @@ The minimum requirements for the capstone project were:
 
 ## Software Packages
 
+* Visual Studio Code v1.81.1
+
 NPM Packages:
 * dotenv
 * vite
