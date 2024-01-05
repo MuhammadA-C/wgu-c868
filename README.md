@@ -54,6 +54,9 @@ The minimum requirements for the capstone project were:
 ![Screenshot of the add menu item screen](https://github.com/MuhammadA-C/wgu-c868-front-end/blob/main/pictures/c868_add_menu_item.png)
 *Screenshot of the add menu item screen*
 
+![Screenshot of the menu items table](https://github.com/MuhammadA-C/wgu-c868-front-end/blob/main/pictures/c868_menu_items_table.png)
+*Screenshot of the menu items table*
+
 
 ---
 
