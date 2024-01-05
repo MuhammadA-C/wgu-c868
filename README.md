@@ -27,13 +27,15 @@ Link-> https://github.com/MuhammadA-C/wgu-c868-back-end
 
 ## Project Requirements
 
-[NEED TO UPDATE]
-
----
-
-## Video Demonstration of Application
-
-[NEED TO UPDATE]
+The minimum requirements for the capstone project were:
+* Build a mobile, desktop or web application
+* Code including inheritance, polymorphism, and encapsulation
+* Search functionality with multiple row results
+* Database to securely add, modify, and delete data
+* Ability to generate reports with multiple columns & rows
+* Exception controls
+* Validation functionality
+* Deploy application
 
 ----
 
@@ -59,4 +61,8 @@ Link-> https://github.com/MuhammadA-C/wgu-c868-back-end
 
 ## Software Packages
 
-[NEED TO UPDATE]
+NPM Packages:
+* dotenv
+* vite
+* react
+* react-dom
