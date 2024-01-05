@@ -41,10 +41,13 @@ The minimum requirements for the capstone project were:
 
 ## Photos of Application
 
-[NEED TO UPDATE]
+### Figma Designs
 
 ![Screenshot of a Figma design for the check out screen](https://github.com/MuhammadA-C/wgu-c868-front-end/blob/main/pictures/Check-Out-Screen-Customer.png)
 *Screenshot of a Figma design for the check out screen*
+
+![Screenshot of a Figma design for the add/update/delete menu item screen](https://github.com/MuhammadA-C/wgu-c868-front-end/blob/main/pictures/Menu-Screen-Owner.png)
+*Screenshot of a Figma design for the add/update/delete menu item screen*
 
 ---
 
