@@ -13,7 +13,19 @@ WGU C868 Software Development Capstone - Front End
 
 # Overview
 
-[NEED TO UPDATE]
+This project was created as a class assignment for WGU, C868. This CRUD Restaurant Management Application was meant to be created for my capstone project.
+
+**Project Prompt:** The prompt for this capstone project was for the most part open ended and just meant to develop an application and deploy it.
+
+---
+
+## Note on Deployment
+
+* Front End: Deployed on Vercel
+* Back End (REST API): Deployed on Railway
+* Database: Amazon RDS MySQL
+
+I have a private repository that I used to deploy the application Vercel and Railway for grading.
 
 ---
 
