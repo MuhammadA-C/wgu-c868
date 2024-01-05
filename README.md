@@ -49,6 +49,9 @@ The minimum requirements for the capstone project were:
 ![Screenshot of a Figma design for the add/update/delete menu item screen](https://github.com/MuhammadA-C/wgu-c868-front-end/blob/main/pictures/Menu-Screen-Owner.png)
 *Screenshot of a Figma design for the add/update/delete menu item screen*
 
+### Screenshots of application
+
+
 ---
 
 ## Future Improvements
