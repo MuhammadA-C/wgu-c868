@@ -17,6 +17,8 @@ This project was created as a class assignment for WGU, C868. This CRUD Restaura
 
 **Project Prompt:** The prompt for this capstone project was for the most part open ended and just meant to develop an application and deploy it.
 
+This repository contains the code for the Front End that was created using ReactJS.
+
 ---
 
 ## Note on Deployment
