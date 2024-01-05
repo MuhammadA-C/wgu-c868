@@ -69,6 +69,12 @@ The minimum requirements for the capstone project were:
 ![Screenshot of the menu items table](https://github.com/MuhammadA-C/wgu-c868-front-end/blob/main/pictures/c868_menu_items_table.png)
 *Screenshot of the menu items table*
 
+---
+
+## Class Diagram
+
+![Screenshot of the class diagram for the model classes](https://github.com/MuhammadA-C/wgu-c868-front-end/blob/main/pictures/WGU_C868_Front_End_Class_Diagram%20copy.png)
+*Screenshot of the class diagram for the model classes*
 
 ---
 
