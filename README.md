@@ -15,7 +15,7 @@ WGU C868 Software Development Capstone - Front End
 
 This project was created as a class assignment for WGU, C868. This CRUD Restaurant Management Application was meant to be created for my capstone project.
 
-**Project Prompt:** The prompt for this capstone project open ended and could develop any application to deploy it.
+**Project Prompt:** The prompt for this capstone project was open ended and could develop any application to deploy it.
 
 This repository contains the code for the Front End that was created using ReactJS + TypeScript.
 
